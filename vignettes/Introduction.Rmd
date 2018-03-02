@@ -1,13 +1,10 @@
 ---
 title: "RWire"
 author: "Fabian"
-vignette: >
-  %\VignetteIndexEntry{"Make accessibility matrix"}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
+```
+{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
