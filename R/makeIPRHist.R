@@ -1,7 +1,7 @@
-#' This function makes a histogram for the number of integrations per ROI
+#' This function makes a histogram for the number of cells with integrations per ROI
 #'
 #' @param matrix Accessibility matrix
-#' @param fit When set to TRUE, fit the histogram
+#' @param fit When set to TRUE, fit the histogram (negative binomial distribution)
 #' @return Histogram (as a plot object)
 #' @export
 
