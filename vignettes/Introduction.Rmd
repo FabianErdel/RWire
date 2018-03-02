@@ -13,11 +13,13 @@ install.packages("devtools")
 devtools::install_github("FabianErdel/RWire")
 ```
 
-## Loading required libraries
+## Loading libraries
 ```
 library("ggplot2")
 library("data.table")
 library("GenomicRanges")
+
+library("RWire")
 ```
 
 ## Making a list of genomic regions of interest

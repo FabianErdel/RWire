@@ -12,9 +12,9 @@ makeIPRHist<-function(matrix, fit = FALSE) {
   # count total number of cells with integrations for each roi
   cells_per_roi <- rowSums(matrix[,4:dim(matrix)[2]] > 0) # count columns with values above zero
 
-  # make, fit and plot a histogram of cell numbers with integrations
+  ### make, fit and plot a histogram of cell numbers with integrations
 
-  # fit negative binomial distribution
+  # fit negative binomial distribution (if applicable)
   if(fit) {
     clspr_fit_nbinom <- fitdistrplus::fitdist(cells_per_roi[(cells_per_roi > 0) & (cells_per_roi < dim(matrix)[2]/10)], "nbinom")
 
@@ -27,6 +27,8 @@ makeIPRHist<-function(matrix, fit = FALSE) {
             geom_vline(xintercept = cutoff, linetype="dotted")
   }
   else {
+    cutoff <- 0
+
     plot <- ggplot2::qplot(cells_per_roi, binwidth = 1) +
       geom_histogram(binwidth = 1) + scale_y_log10(limits=c(1, NA)) +
       labs(title = "Number of 'cells with integrations' per region", x = "Cells with integrations", y = "Regions")
