@@ -30,7 +30,7 @@ path <- system.file("extdata", package = "RWire")
 ```
 
 ## Making a list of genomic regions of interest
-With the following function, 1 kb-tiles for chromosome 18 are generated, which can be used with the sample data provided with this package.
+With the following function, 1 kb-tiles for chromosome 18 are generated, which can be used with the sample data.
 ```
 tiles <- makeTiles(18)
 ```
