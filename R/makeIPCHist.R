@@ -10,10 +10,10 @@ makeIPCHist<-function(matrix) {
 
   # count total number of integrations for each cell
   integrations_per_cell <- colSums(matrix[,4:dim(matrix)[2]])
-  
+
   # make and plot a histogram of integration numbers
-  intpc_hist <- hist(integrations_per_cell, breaks="FD", main = "Number of integrations per cell", xlab = "Integrations", ylab = "Cells", xlim = c(0, 10000*ceiling(round(max(integrations_per_cell/10000)))), plot = FALSE)
+  intpc_hist <- hist(integrations_per_cell, breaks="FD", plot = FALSE)
   plot <- ggplot2::qplot(integrations_per_cell, breaks = intpc_hist$breaks) + geom_histogram()
-  
+
   return(plot)
 }
