@@ -2,18 +2,18 @@
 % Please edit documentation in R/makeIPRHist.R
 \name{makeIPRHist}
 \alias{makeIPRHist}
-\title{This function makes a histogram for the number of integrations per ROI}
+\title{This function makes a histogram for the number of cells with integrations per ROI}
 \usage{
 makeIPRHist(matrix, fit = FALSE)
 }
 \arguments{
 \item{matrix}{Accessibility matrix}
 
-\item{fit}{When set to TRUE, fit the histogram}
+\item{fit}{When set to TRUE, fit the histogram (negative binomial distribution)}
 }
 \value{
 Histogram (as a plot object)
 }
 \description{
-This function makes a histogram for the number of integrations per ROI
+This function makes a histogram for the number of cells with integrations per ROI
 }
