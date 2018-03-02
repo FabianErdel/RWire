@@ -36,6 +36,7 @@ tiles <- makeTiles(18)
 ```
 
 ## Making an accessibility matrix
+The following function makes an accessibility matrix based on the bed files located in the folder 'path'. 
 ```
 # make accessibility matrix from a set of bed files
 am <- makeAccMatrix(path, tiles)
