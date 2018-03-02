@@ -20,52 +20,52 @@ library("data.table")
 library("GenomicRanges")
 ```
 
-## Making a list of genomic regions of interest (here for chromosome 18)
+## Making a list of genomic regions of interest
+With the following function, 1 kb-tiles for chromosome 18 are generated, which can be used with the sample data provided with this package 
 ```
 tiles <- makeTiles(18)
 ```
 
-## Loading path to sample data
+## Loading sample data
 ```
 path <- system.file("extdata", package = "RWire")
 ```
 
 ## Making an accessibility matrix
 ```
-# Make accessibility matrix from a set of bed files
+# make accessibility matrix from a set of bed files
 am <- makeAccMatrix(path, tiles)
 
 # delete empty rows
 am <- am[rowSums(am[,4:dim(am)[2]])>0, ]
 ```
 
-## Making a histogram for integrations per cell and integrations per region
+## Retrieving some statistics
+The following code creates a histogram for the number of integrations per cell and for the number of integrations per region. Such histograms can be useful to detect outliers and to assess the overall quality of the data.
 ```
 hist_ipc <- makeIPCHist(am)
 print(hist_ipc)
+makeIPCStats(am)
 
 hist_ipr <- makeIPRHist(am)
 print(hist_ipr[[1]])
-```
-
-## Retrieving some statistics
-```
-makeIPCStats(am)
 makeIPRStats(am)
 ```
 
 ## Making a correlation matrix
+This function makes a correlation matrix, which contains a Pearson correlation coefficient for each pair-wise combination of genomic regions. Entry (*i*, *j*) contains the correlation coefficient for regions *i* and *j*.
 ```
 cor <- makeCorMatrix(am)
 ```
 
-## Making a correlation matrix that is scaled to genomic coordinates
+## Making a scaled correlation matrix
+This function makes a correlation matrix with genomic positions on its axes, i.e., entry (*i*, *j*) contains the (average) correlation coefficient for regions in genomic bin *i* and genomic bin *j*.
 ```
 size <- 200
 scm <- scaleCorMatrix(cor, size)
 ```
 
-## Saving the scaled correlation matrix as an image
+## Transforming the correlation matrix into an image
 ```
 saveImage(scm, "your_path", size, size, getCorLUT(), -1, 1)
 ```
