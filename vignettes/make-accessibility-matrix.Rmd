@@ -1,0 +1,83 @@
+---
+title: "RWire"
+author: "Fabian"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{"Make accessibility matrix"}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+RWire is an R package for the correlation analysis of single-cell ATAC-seq data. This vignette shows how to use it to calculate accessibility matrices and correlation matrices that help identify co-regulated genomic regions.
+
+## Installation
+RWire can be installed by starting R and typing:
+```
+devtools::install_github("FabianErdel/RWire")
+```
+
+## Loading required libraries
+```
+library("data.table")
+library("GenomicRanges")
+```
+
+## Making a list of genomic regions of interest (here: chromosome 18)
+```
+tiles <- makeTiles(18)
+```
+
+## Loading sample data
+```
+path <- system.file("extdata", package = "RWire")
+```
+
+## Making an accessibility matrix
+```
+am <- makeAccMatrix(path, tiles)
+```
+
+## Saving the accessibility matrix
+```
+write.table(am, file = "your_path", sep = "\t", row.names = FALSE, quote = FALSE)
+```
+
+## Making a histogram for integrations per cell and integrations per region
+```
+hist_ipc <- makeIPCHist(am)
+print(hist_ipc)
+
+hist_ipr <- makeIPRHist(am)
+print(hist_ipr[[1]])
+```
+
+## Retrieving some statistics
+```
+makeIPCStats(am)
+makeIPRStats(am)
+```
+
+## Making a correlation matrix
+```
+cor <- makeCorMatrix(am)
+```
+
+## Making a correlation matrix that is scaled to genomic coordinates
+```
+size <- 200
+scm <- scaleCorMatrix(cor, size)
+```
+
+## Saving the scaled correlation matrix as an image
+```
+saveImage(scm, "your_path", size, size, getCorLUT(), -1, 1)
+```

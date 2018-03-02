@@ -1,0 +1,14 @@
+Package: RWire
+Title: Identification of co-regulated genomic regions based on correlation analysis
+Version: 0.0.0.9000
+Authors@R: person("Fabian", "Erdel", email = "fabian.erdel@bioquant.uni-heidelberg.de", role = c("aut", "cre"))
+Description: This package generates accessibility matrices based on single-cell ATAC-seq data, and calculates correlation matrices for all combinations of genomic regions. Regions with high correlation coefficients tend to have similar accessibility in the same set of cells, indicating that these regions are (directly or indirectly) co-regulated. 
+Depends: R (>= 3.4.0)
+License: GPL
+Encoding: UTF-8
+LazyData: true
+Imports: data.table (>= 1.10.4.3)
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
