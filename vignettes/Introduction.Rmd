@@ -23,16 +23,16 @@ library("GenomicRanges")
 library("RWire")
 ```
 
-## Making a list of genomic regions of interest
-With the following function, 1 kb-tiles for chromosome 18 are generated, which can be used with the sample data provided with this package.
-```
-tiles <- makeTiles(18)
-```
-
 ## Loading sample data
 The sample data provided with this package contain counts from 100 human B cells in the genomic region surrounding the TCF4 gene on chromosome 18.
 ```
 path <- system.file("extdata", package = "RWire")
+```
+
+## Making a list of genomic regions of interest
+With the following function, 1 kb-tiles for chromosome 18 are generated, which can be used with the sample data provided with this package.
+```
+tiles <- makeTiles(18)
 ```
 
 ## Making an accessibility matrix
