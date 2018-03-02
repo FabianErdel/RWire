@@ -1,7 +1,7 @@
 #' This function makes a histogram for the number of integrations per cell
 #'
-#' @param matrix Accessibility matrix
-#' @return Histogram (as a plot object)
+#' @param matrix Accessibility matrix (data frame)
+#' @return Histogram (plot object)
 #' @export
 
 makeIPCHist<-function(matrix) {

@@ -1,8 +1,8 @@
 #' This function makes a histogram for the number of cells with integrations per ROI
 #'
-#' @param matrix Accessibility matrix
+#' @param matrix Accessibility matrix (data frame)
 #' @param fit When set to TRUE, fit the histogram (negative binomial distribution)
-#' @return Histogram (as a plot object)
+#' @return Histogram (plot object)
 #' @export
 
 makeIPRHist<-function(matrix, fit = FALSE) {

@@ -7,7 +7,7 @@
 scaleAccMatrix(accmat, size = 1000, start = 0, end = 249250621)
 }
 \arguments{
-\item{accmat}{Accessibility matrix}
+\item{accmat}{Accessibility matrix (data frame)}
 
 \item{size}{Number of genomic regions to be used}
 

@@ -1,6 +1,6 @@
 #' This function scales accessibility matrices to genomic coordinates
 #'
-#' @param accmat Accessibility matrix
+#' @param accmat Accessibility matrix (data frame)
 #' @param size Number of genomic regions to be used
 #' @param start Minimum genomic coordinate
 #' @param end Maximum genomic coordinate
@@ -28,7 +28,7 @@ scaleAccMatrix<-function(accmat, size = 1000, start = 0, end = 249250621) {
   # make genomic bins
   counts <- as.numeric(table(cut(m[,1], size)))
   indices <- c(0, cumsum(counts))
-  
+
   # make binned accessibility matrix
   bm <- matrix(0, ncol = ncells, nrow = size)
 

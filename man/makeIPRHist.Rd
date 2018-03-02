@@ -7,12 +7,12 @@
 makeIPRHist(matrix, fit = FALSE)
 }
 \arguments{
-\item{matrix}{Accessibility matrix}
+\item{matrix}{Accessibility matrix (data frame)}
 
 \item{fit}{When set to TRUE, fit the histogram (negative binomial distribution)}
 }
 \value{
-Histogram (as a plot object)
+Histogram (plot object)
 }
 \description{
 This function makes a histogram for the number of cells with integrations per ROI

@@ -7,10 +7,10 @@
 makeIPCHist(matrix)
 }
 \arguments{
-\item{matrix}{Accessibility matrix}
+\item{matrix}{Accessibility matrix (data frame)}
 }
 \value{
-Histogram (as a plot object)
+Histogram (plot object)
 }
 \description{
 This function makes a histogram for the number of integrations per cell

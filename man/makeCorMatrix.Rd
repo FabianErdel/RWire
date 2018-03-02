@@ -7,7 +7,7 @@
 makeCorMatrix(accmat, nmax = 0)
 }
 \arguments{
-\item{accmat}{Accessibility matrix}
+\item{accmat}{Accessibility matrix (data frame)}
 
 \item{nmax}{Number of cells used for the analysis. When set to 0, all cells will be considered.}
 }

@@ -1,6 +1,6 @@
 #' This function scales correlation matrices to genomic coordinates
 #'
-#' @param cormat Correlation matrix
+#' @param cormat Correlation matrix (data frame)
 #' @param size Number of genomic regions to be used
 #' @param start Minimum genomic coordinate
 #' @param end Maximum genomic coordinate
@@ -30,7 +30,7 @@ scaleCorMatrix<-function(cormat, size = 1000, start = 0, end = 249250621) {
 
   # make binned correlation matrix
   bm <- matrix(0, ncol = size, nrow = size)
-    
+
   for(i in 1:size) {
     for(j in 1:size) {
       if(counts[i]) {
@@ -38,7 +38,7 @@ scaleCorMatrix<-function(cormat, size = 1000, start = 0, end = 249250621) {
       }
     }
   }
-  
+
   # return binned correlation matrix
   return(bm)
 }
