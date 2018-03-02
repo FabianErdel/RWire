@@ -30,7 +30,7 @@ tiles <- makeTiles(18)
 ```
 
 ## Loading sample data
-The sample data provided with this package contain counts from 100 human B cells in the genomic region surrounding the TCF4 gene on chromosome 18 (genome hg19)
+The sample data provided with this package contain counts from 100 human B cells in the genomic region surrounding the TCF4 gene on chromosome 18.
 ```
 path <- system.file("extdata", package = "RWire")
 ```
