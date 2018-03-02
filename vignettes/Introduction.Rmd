@@ -4,7 +4,7 @@ author: "Fabian"
 ---
 
 ## Introduction
-RWire is an R package for the correlation analysis of single-cell ATAC-seq data. This vignette shows how to use it to calculate an accessibility matrix and a correlation matrix, which contain information on co-regulated genomic regions. For further information see the 'sample-scripts' folder.
+RWire is an R package for the correlation analysis of single-cell ATAC-seq data. This vignette shows how to use it to calculate accessibility matrices and correlation matrices, which contain information on co-regulated genomic regions. For further information see the 'sample-scripts' folder.
 
 ## Installation
 RWire can be installed by starting R and typing:
