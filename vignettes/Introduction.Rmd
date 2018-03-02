@@ -1,8 +1,6 @@
 ---
 title: "RWire"
 author: "Fabian"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{"Make accessibility matrix"}
   %\VignetteEngine{knitr::rmarkdown}
