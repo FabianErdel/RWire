@@ -4,7 +4,7 @@ author: "Fabian"
 ---
 
 ## Introduction
-RWire is an R package for the correlation analysis of single-cell ATAC-seq data. This vignette shows how to use it to calculate accessibility matrices and correlation matrices in order to identify co-regulated genomic regions.
+RWire is an R package for the correlation analysis of single-cell ATAC-seq data. This vignette shows how to use it to calculate an accessibility matrix and a correlation matrix, which contain information on co-regulated genomic regions. For further information see sample-scripts.
 
 ## Installation
 RWire can be installed by starting R and typing:
@@ -14,6 +14,7 @@ devtools::install_github("FabianErdel/RWire")
 ```
 
 ## Loading libraries
+The following libraries are required to run the analysis:
 ```
 library("ggplot2")
 library("data.table")
@@ -29,6 +30,7 @@ tiles <- makeTiles(18)
 ```
 
 ## Loading sample data
+The sample data provided with this package contain counts from 100 human B cells in the genomic region surrounding the TCF4 gene on chromosome 18 (genome hg19)
 ```
 path <- system.file("extdata", package = "RWire")
 ```
@@ -43,7 +45,7 @@ am <- am[rowSums(am[,4:dim(am)[2]])>0, ]
 ```
 
 ## Retrieving some statistics
-The following code creates a histogram for the number of integrations per cell and for the number of integrations per region. Such histograms can be useful to detect outliers and to assess the overall quality of the data.
+The following code creates histograms for the number of integrations per cell and for the 'number of cells with integrations' per genomic region, and retrieves some basic information about the distributions. This information can be useful to detect outliers and to assess the overall data quality.
 ```
 hist_ipc <- makeIPCHist(am)
 print(hist_ipc)
@@ -55,7 +57,7 @@ makeIPRStats(am)
 ```
 
 ## Making a correlation matrix
-This function makes a correlation matrix, which contains a Pearson correlation coefficient for each pair-wise combination of genomic regions. Entry (*i*, *j*) contains the correlation coefficient for regions *i* and *j*.
+This function creates a correlation matrix, which contains a Pearson correlation coefficient for each pair-wise combination of genomic regions. Entry (*i*, *j*) contains the correlation coefficient for regions *i* and *j*.
 ```
 cor <- makeCorMatrix(am)
 ```
@@ -67,7 +69,8 @@ size <- 200
 scm <- scaleCorMatrix(cor, size)
 ```
 
-## Transforming the correlation matrix into an image
+## Saving the correlation matrix as an image
+This function makes a graphical representation of the correlation matrix.
 ```
 saveImage(scm, "your_path", size, size, getCorLUT(), -1, 1)
 ```
