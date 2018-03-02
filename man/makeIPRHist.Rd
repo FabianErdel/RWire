@@ -4,10 +4,12 @@
 \alias{makeIPRHist}
 \title{This function makes a histogram for the number of integrations per ROI}
 \usage{
-makeIPRHist(matrix)
+makeIPRHist(matrix, fit = FALSE)
 }
 \arguments{
 \item{matrix}{Accessibility matrix}
+
+\item{fit}{When set to TRUE, fit the histogram}
 }
 \value{
 Histogram (as a plot object)

@@ -22,33 +22,34 @@ RWire is an R package for the correlation analysis of single-cell ATAC-seq data.
 ## Installation
 RWire can be installed by starting R and typing:
 ```
+install.packages("devtools")
 devtools::install_github("FabianErdel/RWire")
 ```
 
 ## Loading required libraries
 ```
+library("ggplot2")
 library("data.table")
 library("GenomicRanges")
 ```
 
-## Making a list of genomic regions of interest (here: chromosome 18)
+## Making a list of genomic regions of interest (here for chromosome 18)
 ```
 tiles <- makeTiles(18)
 ```
 
-## Loading sample data
+## Loading path to sample data
 ```
 path <- system.file("extdata", package = "RWire")
 ```
 
 ## Making an accessibility matrix
 ```
+# Make accessibility matrix from a set of bed files
 am <- makeAccMatrix(path, tiles)
-```
 
-## Saving the accessibility matrix
-```
-write.table(am, file = "your_path", sep = "\t", row.names = FALSE, quote = FALSE)
+# delete empty rows
+am <- am[rowSums(am[,4:dim(am)[2]])>0, ]
 ```
 
 ## Making a histogram for integrations per cell and integrations per region
