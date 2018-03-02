@@ -31,7 +31,7 @@ makeIPRHist<-function(matrix, fit = FALSE) {
 
     plot <- ggplot2::qplot(cells_per_roi, binwidth = 1) +
       geom_histogram(binwidth = 1) + scale_y_log10(limits=c(1, NA)) +
-      labs(title = "Number of 'cells with integrations' per region", x = "Cells with integrations", y = "Regions")
+      labs(title = "Histogram of the 'number of cells with integrations' per region", x = "Number of cells with integrations", y = "Regions")
   }
   return(list(plot, cutoff))
 }

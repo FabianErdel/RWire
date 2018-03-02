@@ -13,7 +13,8 @@ makeIPCHist<-function(matrix) {
 
   # make and plot a histogram of integration numbers
   intpc_hist <- hist(integrations_per_cell, breaks="FD", plot = FALSE)
-  plot <- ggplot2::qplot(integrations_per_cell, breaks = intpc_hist$breaks) + geom_histogram()
+  plot <- ggplot2::qplot(integrations_per_cell, breaks = intpc_hist$breaks) + geom_histogram() +
+    labs(title = "Histogram of integrations per cell", x = "Integrations", y = "Cells")
 
   return(plot)
 }
