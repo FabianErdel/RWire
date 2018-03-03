@@ -40,7 +40,6 @@ makeAccMatrix<-function(path, rois, nmax = 0) {
   }
 
   # add column names
-  # colnames(accmat) <- c("chr", "start", "end", paste0("cell",seq(1:ncells)))
   colnames(accmat) <- c("chr", "start", "end", paste0(path,"/",files[1:ncells]))
 
   # return accessibility matrix
