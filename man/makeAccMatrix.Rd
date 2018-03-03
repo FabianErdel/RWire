@@ -2,12 +2,12 @@
 % Please edit documentation in R/makeAccMatrix.R
 \name{makeAccMatrix}
 \alias{makeAccMatrix}
-\title{This function makes accessibility matrices from a set of bed files}
+\title{This function makes accessibility matrices from a set of BED files}
 \usage{
 makeAccMatrix(path, rois, nmax = 0)
 }
 \arguments{
-\item{path}{Path to bed files}
+\item{path}{Path to BED files}
 
 \item{rois}{GRanges object containing ROIs}
 
@@ -17,5 +17,5 @@ makeAccMatrix(path, rois, nmax = 0)
 Accessibility matrix
 }
 \description{
-This function makes accessibility matrices from a set of bed files
+This function makes accessibility matrices from a set of BED files
 }

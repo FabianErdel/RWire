@@ -2,12 +2,12 @@
 % Please edit documentation in R/readBed.R
 \name{readBed}
 \alias{readBed}
-\title{This function reads a bed file and stores the reads in a GRanges object}
+\title{This function reads a BED file and stores the reads in a GRanges object}
 \usage{
 readBed(filename, chr = 1, ignore_strand = FALSE)
 }
 \arguments{
-\item{filename}{File name of bed file}
+\item{filename}{File name of BED file}
 
 \item{chr}{Chromosome number}
 
@@ -17,5 +17,5 @@ readBed(filename, chr = 1, ignore_strand = FALSE)
 GRanges object with reads
 }
 \description{
-This function reads a bed file and stores the reads in a GRanges object
+This function reads a BED file and stores the reads in a GRanges object
 }

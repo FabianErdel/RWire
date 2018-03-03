@@ -13,7 +13,7 @@ makeCorMatrix<-function(accmat, nmax = 0) {
   # determine number of ROIs
   nrois <- dim(accmat)[1]
 
-  # determine number of bed files in path
+  # determine number of BED files in path
   ncells <- dim(accmat)[2]-3
 
   # reduce ncells if applicable

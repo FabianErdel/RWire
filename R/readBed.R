@@ -1,6 +1,6 @@
-#' This function reads a bed file and stores the reads in a GRanges object
+#' This function reads a BED file and stores the reads in a GRanges object
 #'
-#' @param filename File name of bed file
+#' @param filename File name of BED file
 #' @param chr Chromosome number
 #' @param ignore_strand When set to TRUE, the strand information is ignored in the overlap calculations (see package 'GenomicRanges')
 #' @return GRanges object with reads

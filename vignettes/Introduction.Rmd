@@ -36,9 +36,9 @@ tiles <- makeTiles(18)
 ```
 
 ## Making an accessibility matrix
-The following function makes an accessibility matrix based on the bed files located in the folder 'path'. The entries of this matrix correspond to the number of integrations in a given genomic region and cell.
+The following function makes an accessibility matrix based on the BED files located in the folder 'path'. The entries of this matrix correspond to the number of integrations in a given genomic region and cell.
 ```
-# make accessibility matrix from a set of bed files
+# make accessibility matrix from a set of BED files
 am <- makeAccMatrix(path, tiles)
 
 # delete empty rows
