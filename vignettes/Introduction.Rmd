@@ -45,7 +45,7 @@ am <- makeAccMatrix(path, tiles)
 am <- am[rowSums(am[,4:dim(am)[2]])>0, ]
 ```
 
-## Retrieving some statistics
+## Retrieving statistics
 The following code creates histograms for the number of integrations per cell and for the 'number of cells with integrations' per genomic region, and retrieves some basic information about the distributions. This information can be useful to detect outliers and to assess the overall data quality.
 ```
 hist_ipc <- makeIPCHist(am)
