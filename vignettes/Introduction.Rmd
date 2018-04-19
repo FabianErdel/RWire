@@ -66,8 +66,9 @@ cor <- makeCorMatrix(am)
 ## Creating a scaled correlation matrix
 This function creates a correlation matrix with genomic positions on its axes, i.e., entry (*i*, *j*) contains the average of the pair-wise correlation coefficients for the regions in genomic bin *i* and genomic bin *j*.
 ```
+chr <- 18
 size <- 200
-scm <- scaleCorMatrix(cor, size)
+scm <- scaleCorMatrix(cor, chr, size)
 ```
 
 ## Saving the correlation matrix as an image

@@ -1,15 +1,17 @@
 #' This function scales correlation matrices to genomic coordinates
 #'
 #' @param cormat Correlation matrix (data frame)
+#' @param chr Number of chromosome
 #' @param size Number of genomic regions to be used
 #' @param start Minimum genomic coordinate
 #' @param end Maximum genomic coordinate
 #' @return Scaled correlation matrix
 #' @export
 
-scaleCorMatrix<-function(cormat, size = 1000, start = 0, end = 249250621) {
+scaleCorMatrix<-function(cormat, chr, size = 1000, start = 0, end = 249250621) {
   # check input arguments
   if(!is.data.frame(cormat)) stop("cormat must be a data frame")
+  if(!is.numeric(chr)) stop("chr must be a number")
   if(!is.numeric(size)) stop("size must be a number")
   if(!is.numeric(start)) stop("start must be a number")
   if(!is.numeric(end)) stop("end must be a number")
@@ -17,8 +19,8 @@ scaleCorMatrix<-function(cormat, size = 1000, start = 0, end = 249250621) {
   # determine number of ROIs
   nrois <- dim(cormat)[1]
 
-  # make numeric correlation matrix containing regions between start and end
-  sel_indices <- cormat[,2]>start & cormat[,3]<end
+  # make numeric correlation matrix containing regions (on chromosome chr) between start and end
+  sel_indices <- cormat[,1]==paste0('chr',chr) & cormat[,2]>start & cormat[,3]<end
   m <- data.matrix(cormat[sel_indices, c(FALSE, TRUE, TRUE, sel_indices)])
 
   # determine scaling factor (kb/pixel)
@@ -33,7 +35,7 @@ scaleCorMatrix<-function(cormat, size = 1000, start = 0, end = 249250621) {
 
   for(i in 1:size) {
     for(j in 1:size) {
-      if(counts[i]) {
+      if(counts[i] & counts[j]) {
         bm[i,j] <- mean(m[(indices[i]+1):indices[i+1], (2+indices[j]+1):(2+indices[j+1])])
       }
     }
