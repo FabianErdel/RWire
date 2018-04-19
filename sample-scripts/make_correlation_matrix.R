@@ -34,7 +34,8 @@ saveImage(as.matrix(cor[,4:(nrois+3)]), outpath2, nrois, nrois, grey(seq(0, 1, l
 size <- 200
 
 # make scaled matrix
-scm <- scaleCorMatrix(cor, size)
+chr <- 1
+scm <- scaleCorMatrix(cor, chr, size)
 
 # save matrix
 saveImage(scm, outpath3, size, size, getCorLUT(), -1, 1)
