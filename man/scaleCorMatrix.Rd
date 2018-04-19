@@ -4,10 +4,12 @@
 \alias{scaleCorMatrix}
 \title{This function scales correlation matrices to genomic coordinates}
 \usage{
-scaleCorMatrix(cormat, size = 1000, start = 0, end = 249250621)
+scaleCorMatrix(cormat, chr, size = 1000, start = 0, end = 249250621)
 }
 \arguments{
 \item{cormat}{Correlation matrix (data frame)}
+
+\item{chr}{Number of chromosome}
 
 \item{size}{Number of genomic regions to be used}
 
