@@ -10,8 +10,6 @@ getCorRanges(accmat, replicates = 100)
 \item{accmat}{Accessibility matrix}
 
 \item{replicates}{Number of replicates for the bootstrap}
-
-\item{confidence}{Confidence level (between 0 and 1)}
 }
 \value{
 Table with correlation coefficients

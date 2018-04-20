@@ -2,7 +2,6 @@
 #'
 #' @param accmat Accessibility matrix
 #' @param replicates Number of replicates for the bootstrap
-#' @param confidence Confidence level (between 0 and 1)
 #' @return Table with correlation coefficients
 #' @export
 
