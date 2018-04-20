@@ -1,4 +1,4 @@
-#' This function returns p-values assessing the difference between two sets of correlatiosn coefficients based on the Kolmogorov-Smirnov test
+#' This function returns p-values assessing the difference between two sets of correlation coefficients based on the Kolmogorov-Smirnov test
 #'
 #' @param corrng1 Table 1 with annotations and correlation coefficients
 #' @param corrng2 Table 2 with annotations and correlation coefficients
