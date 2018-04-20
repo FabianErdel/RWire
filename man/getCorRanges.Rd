@@ -2,9 +2,9 @@
 % Please edit documentation in R/getCorRanges.R
 \name{getCorRanges}
 \alias{getCorRanges}
-\title{This function returns correlation coefficients and their confidence intervals}
+\title{This function returns bootstrapped correlation coefficients}
 \usage{
-getCorRanges(accmat, replicates = 100, confidence = 0.95)
+getCorRanges(accmat, replicates = 100)
 }
 \arguments{
 \item{accmat}{Accessibility matrix}
@@ -14,8 +14,8 @@ getCorRanges(accmat, replicates = 100, confidence = 0.95)
 \item{confidence}{Confidence level (between 0 and 1)}
 }
 \value{
-Stack of matrices containing correlation coefficients (first layer) along with minimum, maximum and median values from bootstrapping (second, third and fourth layer)
+Table with correlation coefficients
 }
 \description{
-This function returns correlation coefficients and their confidence intervals
+This function returns bootstrapped correlation coefficients
 }
