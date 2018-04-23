@@ -1,4 +1,4 @@
-#' This function returns p-values assessing the difference between two sets of correlation coefficients based on the Kolmogorov-Smirnov test
+#' This function returns p-values assessing the difference between two sets of correlatiosn coefficients based on the Kolmogorov-Smirnov test
 #'
 #' @param corrng1 Table 1 with annotations and correlation coefficients
 #' @param corrng2 Table 2 with annotations and correlation coefficients
@@ -14,12 +14,14 @@ compareCorrelations<-function(corrng1, corrng2) {
   nrois <- dim(corrng1[[4]])[1]
 
   # perform KS test
-  funks <- function(x,y) {
-    return(ks.test(corrng1[[4]][x,y,], corrng2[[4]][x,y,])$p)
+  pval <- matrix(1, nrow=nrois, ncol=nrois)
+
+  for(x in 1:nrois) {
+    for(y in 1:nrois) {
+      pval[x,y] <- ks.test(corrng1[[4]][x,y,], corrng2[[4]][x,y,])$p
+    }
   }
 
-  pval <- sapply(1:nrois, function(x) mapply(funks, x, 1:nrois))
-
   # return matrix with (approximated) p-values
-  return(pval)
+  return(list(corrng1[[1]],corrng1[[2]],corrng1[[3]],pval))
 }

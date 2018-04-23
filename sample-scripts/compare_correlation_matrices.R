@@ -27,7 +27,12 @@ cr2 <- getCorRanges(am2, replicates)
 pval <- compareCorrelations(cr1, cr2)
 
 # set p-values for correlations that are zero in both matrices to unity
-pval[cor1==0 & cor2==0] <- 1
+pval[[4]][cor1[4:(nrois+3)]==0 & cor2[4:(nrois+3)]==0] <- 1
+
+# make matrix with exponents of p-values
+logpval <- -log10(pval[[4]])
+maxval <- max(logpval[is.finite(logpval)])
+logpval[!is.finite(logpval)] <- maxval
 
 # save matrix with p-values as image
-saveImage(pval, outpath, nrois, nrois, getCorLUT(), -1, 1)
+saveImage(logpval, outpath, nrois, nrois, getCorLUT(), min(logpval), max(logpval))
