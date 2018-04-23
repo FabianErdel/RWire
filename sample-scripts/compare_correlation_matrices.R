@@ -42,4 +42,4 @@ saveImage(logpval, outpath1, nrois, nrois, getCorLUT(), min(logpval), max(logpva
 slp <- scaleCorMatrix(cbind(pval[[1]], pval[[2]], pval[[3]], data.frame(logpval)), chr=1, size=200)
 
 # save scaled matrix with p-values as image
-saveImage(slp, outpath2, nrois, nrois, getCorLUT(), min(logpval), max(logpval))
+saveImage(slp, outpath2, nrois, nrois, getCorLUT(), min(slp), max(slp))
