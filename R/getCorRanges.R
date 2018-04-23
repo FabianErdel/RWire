@@ -19,7 +19,7 @@ getCorRanges<-function(accmat, replicates = 100) {
   # calculate correlations for resampled accessibility matrices
   cortbl <- array(0, dim = c(nrois, nrois, 1+replicates))
   cortbl[, , 1] <- cor(t(m))
-  res1 <- as.data.frame(cortbl[, , 1])
+  res <- as.data.frame(cortbl[, , 1])
 
   for(i in 1:replicates) {
     indices <- sample.int(ncells, ncells, replace = TRUE)
@@ -34,5 +34,5 @@ getCorRanges<-function(accmat, replicates = 100) {
   cortbl <- aperm(cortbl, c(2,3,1))
 
   # return correlation coefficients
-  return(list(accmat[,1], accmat[,2], accmat[,3], cortbl))
+  return(list(accmat[,1], accmat[,2], accmat[,3], cortbl, res))
 }

@@ -14,6 +14,7 @@ getCIs<-function(corrng, confidence = 0.95) {
   start <- corrng[[2]]
   end <- corrng[[3]]
   cortbl <- corrng[[4]]
+  res1 <- corrng[[5]]
 
   # retrieve start/end of confidence intervals and median correlation coefficient
   replicates <- dim(cortbl)[3]

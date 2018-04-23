@@ -1,11 +1,11 @@
-#' This function returns p-values assessing the difference between two sets of correlatiosn coefficients based on the Kolmogorov-Smirnov test
+#' This function returns p-values assessing the difference between two bootstrap distributions of correlation coefficients based on the Kolmogorov-Smirnov test
 #'
 #' @param corrng1 Table 1 with annotations and correlation coefficients
 #' @param corrng2 Table 2 with annotations and correlation coefficients
 #' @return Matrix with p-values
 #' @export
 
-compareCorrelations<-function(corrng1, corrng2) {
+compareCorDistributions<-function(corrng1, corrng2) {
   # check input arguments
   if(!is.list(corrng1)) stop("corrng1 must be a list")
   if(!is.list(corrng2)) stop("corrng2 must be a list")
