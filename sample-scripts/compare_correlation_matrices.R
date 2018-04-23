@@ -1,7 +1,8 @@
 # set path for I/O
 inpath1 <- "your_path_to_data"
 inpath2 <- "your_path_to_data"
-outpath <- "your_path_for_matrix"
+outpath1 <- "your_path_for_matrix"
+outpath2 <- "your_path_for_scaled_matrix"
 
 # read accessibility matrices (containing data for the same genomic regions, but for different conditions)
 ram1 <- fread(inpath1, data.table=FALSE, sep="\t")
@@ -35,4 +36,10 @@ maxval <- max(logpval[is.finite(logpval)])
 logpval[!is.finite(logpval)] <- maxval
 
 # save matrix with p-values as image
-saveImage(logpval, outpath, nrois, nrois, getCorLUT(), min(logpval), max(logpval))
+saveImage(logpval, outpath1, nrois, nrois, getCorLUT(), min(logpval), max(logpval))
+
+# make matrix with p-values scaled according to genomic positions
+slp <- scaleCorMatrix(cbind(pval[[1]], pval[[2]], pval[[3]], data.frame(logpval)), chr=1, size=200)
+
+# save matrix with p-values as image
+saveImage(slp, outpath2, nrois, nrois, getCorLUT(), min(logpval), max(logpval))
