@@ -41,5 +41,5 @@ saveImage(logpval, outpath1, nrois, nrois, getCorLUT(), min(logpval), max(logpva
 # make matrix with p-values scaled according to genomic positions
 slp <- scaleCorMatrix(cbind(pval[[1]], pval[[2]], pval[[3]], data.frame(logpval)), chr=1, size=200)
 
-# save matrix with p-values as image
+# save scaled matrix with p-values as image
 saveImage(slp, outpath2, nrois, nrois, getCorLUT(), min(logpval), max(logpval))
