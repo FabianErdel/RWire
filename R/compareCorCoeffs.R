@@ -19,11 +19,15 @@ compareCorCoeffs<-function(corrng1, corrng2) {
 
   for(x in 1:nrois) {
     for(y in 1:nrois) {
+      # generate bootstrap distribution for difference of correlation coefficients
       cmb <- expand.grid(corrng1[[4]][x,y,], corrng2[[4]][x,y,])
       cmb <- cmb[is.finite(cmb[,1]) & is.finite(cmb[,2]),]
-      up <- sum(cmb[,1]-cmb[,2]>0)
-      lw <- sum(cmb[,1]-cmb[,2]<0)
-      if(up+lw>0) {pval[x,y] <- min(up,lw)/(up+lw)}
+
+      # caclulate p-value (if valid bootstrap samples are available)
+      if(dim(cmb)[1]>0) {
+        if(corrng1[[5]][x,y]-corrng2[[5]][x,y]>0) {pval[x,y] <- (sum(cmb[,1]-cmb[,2]<0))/dim(cmb)[1]}
+        if(corrng1[[5]][x,y]-corrng2[[5]][x,y]<0) {pval[x,y] <- (sum(cmb[,1]-cmb[,2]>0))/dim(cmb)[1]}
+      }
     }
   }
 
