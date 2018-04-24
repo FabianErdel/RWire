@@ -39,7 +39,8 @@ logpval[!is.finite(logpval)] <- maxval
 saveImage(logpval, outpath1, nrois, nrois, getCorLUT(), min(logpval), max(logpval))
 
 # make p-value matrix scaled according to genomic positions (for chromosome 1)
-spval <- scaleCorMatrix(cbind(pval[[1]], pval[[2]], pval[[3]], data.frame(logpval)), chr=1, size=200)
+size <- 200
+spval <- scaleCorMatrix(cbind(pval[[1]], pval[[2]], pval[[3]], data.frame(logpval)), chr=1, size=size)
 
 # save scaled p-value matrix as image
-saveImage(spval, outpath2, nrois, nrois, getCorLUT(), min(spval), max(spval))
+saveImage(spval, outpath2, size, size, getCorLUT(), min(spval), max(spval))
