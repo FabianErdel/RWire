@@ -18,7 +18,7 @@ compareCorDistributions<-function(corrng1, corrng2) {
 
   for(x in 1:nrois) {
     for(y in 1:nrois) {
-      pval[x,y] <- ks.test(corrng1[[4]][x,y,], corrng2[[4]][x,y,])$p
+      pval[x,y] <- ks.test(corrng1[[4]][x,y,is.finite(corrng1[[4]][x,y,])], corrng2[[4]][x,y,is.finite(corrng2[[4]][x,y,])])$p
     }
   }
 

@@ -26,12 +26,15 @@ getCorRanges<-function(accmat, replicates = 100) {
     cortbl[, , 1+i] <- cor(t(m[,indices]))
   }
 
-  # remove NA values that arise from empty rows
-  cortbl[is.na(cortbl)] <- 0
+  # replace NA values that arise from empty rows
+  cortbl[is.na(cortbl)] <- 2
 
   # sort correlation coefficients across samples (third index)
   cortbl <- apply(cortbl, c(1,2), sort)
   cortbl <- aperm(cortbl, c(2,3,1))
+
+  # put back NA values
+  cortbl[cortbl==2] <- NA
 
   # return correlation coefficients
   return(list(accmat[,1], accmat[,2], accmat[,3], cortbl, res))

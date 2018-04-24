@@ -2,7 +2,7 @@
 % Please edit documentation in R/compareCorCoeffs.R
 \name{compareCorCoeffs}
 \alias{compareCorCoeffs}
-\title{This function returns p-values assessing the difference between two sets of correlation coefficients based on their bootstrapped confidence intervals}
+\title{This function returns p-values assessing the difference between two sets of correlation coefficients based on their bootstrap distributions}
 \usage{
 compareCorCoeffs(corrng1, corrng2)
 }
@@ -15,5 +15,5 @@ compareCorCoeffs(corrng1, corrng2)
 Matrix with p-values
 }
 \description{
-This function returns p-values assessing the difference between two sets of correlation coefficients based on their bootstrapped confidence intervals
+This function returns p-values assessing the difference between two sets of correlation coefficients based on their bootstrap distributions
 }
