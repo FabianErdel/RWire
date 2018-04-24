@@ -1,10 +1,8 @@
 # set path for I/O
-inpath1 <- "your_path_to_data"
-inpath2 <- "your_path_to_data"
-outpath1 <- "your_path_for_matrix1"
-outpath2 <- "your_path_for_scaled_matrix1"
-outpath3 <- "your_path_for_matrix2"
-outpath4 <- "your_path_for_scaled_matrix2"
+inpath1 <- "your_path_to_data1"
+inpath2 <- "your_path_to_data2"
+outpath1 <- "your_path_for_matrix"
+outpath2 <- "your_path_for_scaled_matrix"
 
 # read accessibility matrices (containing data for the same genomic regions, but for different conditions)
 ram1 <- fread(inpath1, data.table=FALSE, sep="\t")
@@ -26,10 +24,7 @@ replicates <- 100
 cr1 <- getCorRanges(am1, replicates)
 cr2 <- getCorRanges(am2, replicates)
 
-
-#### compare correlation coefficients based on their bootstrapped confidence intervals ####
-
-# calculate p-values for the difference between correlation coefficients
+# calculate p-values for the difference between correlation coefficients (based on bootstrap distributions)
 pval <- compareCorCoeffs(cr1, cr2)
 
 # set p-values for correlations that are zero in both matrices to unity
@@ -40,34 +35,11 @@ logpval <- -log10(pval[[4]])
 maxval <- max(logpval[is.finite(logpval)])
 logpval[!is.finite(logpval)] <- maxval
 
-# save matrix with p-values as image
+# save p-value matrix as image
 saveImage(logpval, outpath1, nrois, nrois, getCorLUT(), min(logpval), max(logpval))
 
-# make matrix with p-values scaled according to genomic positions
+# make p-value matrix scaled according to genomic positions (for chromosome 1)
 spval <- scaleCorMatrix(cbind(pval[[1]], pval[[2]], pval[[3]], data.frame(logpval)), chr=1, size=200)
 
-# save scaled matrix with p-values as image
+# save scaled p-value matrix as image
 saveImage(spval, outpath2, nrois, nrois, getCorLUT(), min(spval), max(spval))
-
-
-#### compare bootstrap distributions of correlation coefficients using a Kolmogorov-Smirnov test ####
-
-# calculate p-values for the difference between bootstrap distributions of correlation coefficients (KS test)
-pks <- compareCorDistributions(cr1, cr2)
-
-# set p-values for correlations that are zero in both matrices to unity
-pks[[4]][cor1[4:(nrois+3)]==0 & cor2[4:(nrois+3)]==0] <- 1
-
-# make matrix with exponents of p-values
-logpks <- -log10(pks[[4]])
-maxval <- max(logpks[is.finite(logpks)])
-logpks[!is.finite(logpks)] <- maxval
-
-# save matrix with p-values as image
-saveImage(logpks, outpath3, nrois, nrois, getCorLUT(), min(logpks), max(logpks))
-
-# make matrix with p-values scaled according to genomic positions
-spks <- scaleCorMatrix(cbind(pks[[1]], pks[[2]], pks[[3]], data.frame(logpks)), chr=1, size=200)
-
-# save scaled matrix with p-values as image
-saveImage(spks, outpath4, nrois, nrois, getCorLUT(), min(spks), max(spks))
