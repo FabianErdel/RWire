@@ -12,14 +12,14 @@ am2 <- fread(inpath2, data.table=FALSE, sep="\t")
 am1 <- am1[rowSums(am1[,4:dim(am1)[2]])>0, ]
 am2 <- am2[rowSums(am2[,4:dim(am2)[2]])>0, ]
 
-# get number of accessible regions
+# get numbers of accessible regions
 nrois1 <- dim(am1)[1]
 nrois2 <- dim(am2)[1]
 
-# make correlation matrix
-ccor <- makeCrossCorMatrix(am1,am2)
+# make cross correlation matrix
+ccor <- makeCrossCorMatrix(am1, am2)
 
-# save correlation matrix (as table)
+# save cross correlation matrix (as table)
 write.table(ccor, file = outpath1, sep = "\t", row.names = FALSE, col.names = FALSE, quote = FALSE)
 
 # save correlation matrix (as image)
