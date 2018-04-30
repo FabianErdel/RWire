@@ -18,7 +18,7 @@ end <- 1000000
 am <- am[am[,2]>start & am[,3]<end, ]
 
 # get number of accessible regions
-nrois <- dim(am)[1]-3
+nrois <- dim(am)[1]
 
 # make correlation matrix
 cor <- makeCorMatrix(am)
