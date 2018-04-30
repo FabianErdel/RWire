@@ -27,7 +27,7 @@ makeCrossCorMatrix<-function(accmat1, accmat2, nmax = 0) {
   am2 <- t(as.matrix(accmat2[1:nrois2, 4:(3+ncells)]))
 
   # make correlation matrix
-  cormat <- as.data.frame(cor(am1,am2))
+  cormat <- as.data.frame(cor(am1, am2))
 
   # add annotation columns
   cormat <- cbind(accmat1[,1], accmat1[,2], accmat1[,3], cormat)
