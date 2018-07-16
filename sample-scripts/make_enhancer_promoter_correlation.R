@@ -9,8 +9,8 @@ promoters <- readBed(promoter_path)
 enhancers <- readBed(enhancer_path)
 
 # make accessibility matrices for promoters and enhancers
-amp <- makeAccMatrix2(inpath, promoters)
-ame <- makeAccMatrix2(inpath, enhancers)
+amp <- makeAccMatrix(inpath, promoters)
+ame <- makeAccMatrix(inpath, enhancers)
 
 # remove empty rows
 amp <- amp[rowSums(amp[,4:dim(amp)[2]])>0, ]
