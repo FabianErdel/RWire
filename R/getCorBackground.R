@@ -44,7 +44,7 @@ getCorBackground<-function(accmat1, accmat2) {
 
   ## correlation for resampled columns
   ## (total number of integrations for each cell kept constant)
-  cormat <- makeCrossCorMatrix(as.data.frame(c(accmat1[,1:3], apply(accmat1[,4:(3+ncells)], 2, function(x) sample(x)))), accmat2)
+  cormat <- makeCrossCorMatrix(as.data.frame(cbind.data.frame(accmat1[,1:3], apply(accmat1[,4:(3+ncells)], 2, function(x) sample(x)))), accmat2)
 
   # get coordinates of the first element on each chromosome
   chr1 <- c(4, which((cormat[4:(dim(cormat)[1]-1),1] == cormat[5:dim(cormat)[1],1]) == F)+4, dim(cormat)[1]+1)
