@@ -23,8 +23,8 @@ makeCrossCorMatrix<-function(accmat1, accmat2, nmax = 0) {
   if((nmax > 0) & (ncells > nmax)) {ncells = nmax}
 
   # convert accessibility matrix to numeric matrix object
-  am1 <- t(as.matrix(accmat1[1:nrois1, 4:(3+ncells)]))
-  am2 <- t(as.matrix(accmat2[1:nrois2, 4:(3+ncells)]))
+  am1 <- apply(t(as.matrix(accmat1[1:nrois1, 4:(3+ncells)])), c(1,2), as.numeric)
+  am2 <- apply(t(as.matrix(accmat2[1:nrois2, 4:(3+ncells)])), c(1,2), as.numeric)
 
   # make correlation matrix
   cormat <- as.data.frame(cor(am1, am2))
