@@ -15,7 +15,8 @@ readBed<-function(filename, chr = 1, ignore_strand = FALSE) {
   data <- data.table::fread(filename, data.table=FALSE, header=FALSE)
 
   # assign column names for conversion to GRanges object
-  colnames(data) <- c("chr", "start", "end", "name", "score", "strand")
+  colnames(data)[length(colnames(data))] <- "strand"
+  colnames(data)[1:3] <- c("chr", "start", "end")
 
   # convert data table to GRanges object
   reads <- GenomicRanges::makeGRangesFromDataFrame(data, keep.extra.columns=FALSE, ignore.strand=ignore_strand, seqinfo=NULL,
