@@ -16,17 +16,13 @@ getCorBackground<-function(accmat1, accmat2) {
   nrois2 <- dim(accmat2)[2]
   ncells <- dim(accmat1)[2]-3
 
-  # convert data frames into matrices (omitting annotation columns)
-  m1 <- data.matrix(accmat1[,4:dim(accmat1)[2]])
-  m2 <- data.matrix(accmat2[,4:dim(accmat2)[2]])
-
   # initialize data frame for results
   bg_cis<- matrix(0, nrow=2, ncol=100)
   bg_trans<- matrix(0, nrow=2, ncol=100)
 
   ## correlation for resampled rows
   ## (total numbe of integrations for each genomic element kept constant)
-  cormat <- makeCrossCorMatrix(t(apply(m1, 1, function(x) sample(x))), m2)
+  cormat <- makeCrossCorMatrix(as.data.frame(t(apply(accmat1, 1, function(x) c(x[1:3], sample(x[4:dim(accmat1)[2]]))))), accmat2)
 
   # get coordinates of the first element on each chromosome
   chr1 <- c(4, which((cormat[4:(dim(cormat)[1]-1),1] == cormat[5:dim(cormat)[1],1]) == F)+4, dim(cormat)[1]+1)
@@ -48,7 +44,7 @@ getCorBackground<-function(accmat1, accmat2) {
 
   ## correlation for resampled columns
   ## (total number of integrations for each cell kept constant)
-  cormat <- makeCrossCorMatrix(apply(m1, 2, function(x) sample(x)), m2)
+  cormat <- makeCrossCorMatrix(as.data.frame(c(accmat1[1:3], apply(accmat1[4:dim(accmat1)[2]], 2, function(x) sample(x)))), accmat2)
 
   # get coordinates of the first element on each chromosome
   chr1 <- c(4, which((cormat[4:(dim(cormat)[1]-1),1] == cormat[5:dim(cormat)[1],1]) == F)+4, dim(cormat)[1]+1)
