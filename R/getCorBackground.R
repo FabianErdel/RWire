@@ -13,7 +13,7 @@ getCorBackground<-function(accmat1, accmat2) {
 
   # determine number of ROIs and number of cells
   nrois1 <- dim(accmat1)[1]
-  nrois2 <- dim(accmat2)[2]
+  nrois2 <- dim(accmat2)[1]
   ncells <- dim(accmat1)[2]-3
 
   # initialize data frame for results
