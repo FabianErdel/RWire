@@ -11,6 +11,7 @@ makeCrossCorMatrix<-function(accmat1, accmat2, nmax = 0) {
   if(!is.data.frame(accmat1)) stop("accmat1 must be a data frame")
   if(!is.data.frame(accmat2)) stop("accmat2 must be a data frame")
   if(!is.numeric(nmax)) stop("nmax must be a number")
+  if(dim(accmat1)[2]!=dim(accmat2)[2]) stop("dimensions are incompatible")
 
   # determine number of ROIs
   nrois1 <- dim(accmat1)[1]
