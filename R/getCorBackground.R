@@ -39,8 +39,8 @@ getCorBackground<-function(accmat1, accmat2) {
   }
 
   # determine quantiles
-  bg_cis[1,] <- quantile(do.call(c,cis[!is.na(cis)]), seq(0.01,1,by=0.01))
-  bg_trans[1,] <- quantile(do.call(c,trans[!is.na(trans)]), seq(0.01,1,by=0.01))
+  bg_cis[1,] <- quantile(do.call(c,cis[!is.na(cis)]), seq(0.01,1,by=0.01), na.rm=F)
+  bg_trans[1,] <- quantile(do.call(c,trans[!is.na(trans)]), seq(0.01,1,by=0.01), na.rm=F)
 
   ## correlation for resampled columns
   ## (total number of integrations for each cell kept constant)
@@ -61,8 +61,8 @@ getCorBackground<-function(accmat1, accmat2) {
   }
 
   # determine quantiles
-  bg_cis[2,] <- quantile(do.call(c,cis[!is.na(cis)]), seq(0.01,1,by=0.01))
-  bg_trans[2,] <- quantile(do.call(c,trans[!is.na(trans)]), seq(0.01,1,by=0.01))
+  bg_cis[2,] <- quantile(do.call(c,cis[!is.na(cis)]), seq(0.01,1,by=0.01), na.rm=F)
+  bg_trans[2,] <- quantile(do.call(c,trans[!is.na(trans)]), seq(0.01,1,by=0.01), na.rm=F)
 
   # return correlation coefficients
   return(list(bg_cis, bg_trans))
