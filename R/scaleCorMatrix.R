@@ -25,10 +25,10 @@ scaleCorMatrix<-function(cm, chr, size = 1000, start = 0, end = 249250621) {
   m <- data.matrix(cm@cormat[sel_indices, sel_indices])
 
   # determine scaling factor (kb/pixel)
-  # scale <- (max(m[,1])-min(m[,1]))/size
+  # scale <- (max(cm@coord1[,2])-min(cm@coord1[,2]))/size
 
   # make genomic bins
-  counts <- as.numeric(table(cut(m[,1], size)))
+  counts <- as.numeric(table(cut(cm@coord1[,2], size)))
   indices <- c(0, cumsum(counts))
 
   # make binned correlation matrix
