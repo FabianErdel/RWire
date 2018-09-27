@@ -1,7 +1,7 @@
 #' This function makes a cross correlation matrix from two accessibility matrices
 #'
-#' @param accmat1 Accessibility matrix 1 (data frame)
-#' @param accmat2 Accessibility matrix 2 (data frame)
+#' @param am1 Accessibility matrix 1
+#' @param am2 Accessibility matrix 2
 #' @param nmax Number of cells used for the analysis. When set to 0, all cells will be considered.
 #' @return Cross correlation matrix
 #' @export

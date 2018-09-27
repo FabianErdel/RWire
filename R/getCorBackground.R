@@ -1,7 +1,7 @@
 #' This function returns the background correlation obtained with permuted entries
 #'
-#' @param accmat1 Accessibility matrix 1
-#' @param accmat2 Accessibility matrix 2
+#' @param am1 Accessibility matrix 1
+#' @param am2 Accessibility matrix 2
 #' @return Matrix with background correlations (quantiles)
 #' @export
 
@@ -26,8 +26,8 @@ getCorBackground<-function(am1, am2) {
   cm <- makeCrossCorMatrix(scram1, am2)
 
   # get coordinates of the first element on each chromosome
-  chr1 <- c(1, which((cm@cormat[1:(dim(cm@cormat)[1]-1),1] == cm@cormat[2:dim(cm@cormat)[1],1]) == F)+1, dim(cm@cormat)[1]+1)
-  chr2 <- c(1, which((cm@cormat[1,1:(dim(cm@cormat)[2]-1)] == cm@cormat[1,2:dim(cm@cormat)[2]]) == F)+1, dim(cm@cormat)[2]+1)
+  chr1 <- c(1, which((cm@coord1[1:(dim(cm@coord1)[1]-1),1] == cm@coord1[2:dim(cm@coord1)[1],1]) == F)+1, dim(cm@coord1)[1]+1)
+  chr2 <- c(1, which((cm@coord2[1:(dim(cm@coord2)[2]-1),1] == cm@coord2[2:dim(cm@coord2)[2],1]) == F)+1, dim(cm@coord2)[2]+1)
 
   # aggregate cis and trans correlations
   cis <- vector("list", length(chr1)-1)
