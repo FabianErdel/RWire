@@ -1,29 +1,26 @@
 #' This function returns bootstrapped correlation coefficients
 #'
-#' @param accmat Accessibility matrix
+#' @param am Accessibility matrix
 #' @param replicates Number of replicates for the bootstrap
 #' @return Table with correlation coefficients
 #' @export
 
-getCorRanges<-function(accmat, replicates = 100) {
+getCorRanges<-function(am, replicates = 100) {
   # check input arguments
-  if(!is.data.frame(accmat)) stop("accmat must be a data frame")
+  if(class(am)!="AccMatrix") stop("am must be an AccMatrix object")
 
   # determine number of ROIs and number of cells
-  nrois <- dim(accmat)[1]
-  ncells <- dim(accmat)[2]-3
-
-  # convert data frame into matrix (omitting annotation columns)
-  m <- data.matrix(accmat[,4:dim(accmat)[2]])
+  nrois <- dim(am@accmat)[1]
+  ncells <- dim(am@accmat)[2]
 
   # calculate correlations for resampled accessibility matrices
   cortbl <- array(0, dim = c(nrois, nrois, 1+replicates))
-  cortbl[, , 1] <- cor(t(m))
+  cortbl[, , 1] <- cor(t(am@accmat))
   res <- as.data.frame(cortbl[, , 1])
 
   for(i in 1:replicates) {
     indices <- sample.int(ncells, ncells, replace = TRUE)
-    cortbl[, , 1+i] <- cor(t(m[,indices]))
+    cortbl[, , 1+i] <- cor(t(am@accmat[,indices]))
   }
 
   # replace NA values that arise from empty rows
@@ -37,5 +34,5 @@ getCorRanges<-function(accmat, replicates = 100) {
   cortbl[cortbl==2] <- NA
 
   # return correlation coefficients
-  return(list(accmat[,1], accmat[,2], accmat[,3], cortbl, res))
+  return(list(am@coord[,1], am@coord[,2], am@coord[,3], cortbl, res))
 }
