@@ -41,8 +41,8 @@ The following function makes an accessibility matrix based on the BED files loca
 # make accessibility matrix from a set of BED files
 am <- makeAccMatrix(path, tiles)
 
-# delete empty rows
-am <- am[rowSums(am[,4:dim(am)[2]])>0, ]
+# remove empty rows
+am <- removeEmptyRows(am)
 ```
 
 ## Retrieving statistics
