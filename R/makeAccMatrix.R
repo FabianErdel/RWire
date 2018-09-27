@@ -22,7 +22,9 @@ makeAccMatrix<-function(path, rois, nmax = 0) {
   if((nmax > 0) & (ncells > nmax)) {ncells = nmax}
 
   # initialize data frame
-  accmat = data.frame(chr = as.character(seqnames(rois)), start = start(rois), end = end(rois), stringsAsFactors=F)
+  am <- new("AccMatrix",
+            coord = data.frame(chr = as.character(seqnames(rois)), start = start(rois), end = end(rois), stringsAsFactors=F),
+            accmat = data.frame(rep(0,length(rois))))
 
   # loop through BED files
   for(i in 1:ncells) {
@@ -36,12 +38,12 @@ makeAccMatrix<-function(path, rois, nmax = 0) {
     cnt <- countReads(data, rois)
 
     # write counts in accessibility matrix
-    accmat[,i+3] <- cnt
+    am@accmat[,i] <- cnt
   }
 
   # add column names
-  colnames(accmat) <- c("chr", "start", "end", paste0(path,"/",files[1:ncells]))
+  colnames(am@accmat) <- c(paste0(path,"/",files[1:ncells]))
 
   # return accessibility matrix
-  return(accmat)
+  return(am)
 }

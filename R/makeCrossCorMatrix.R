@@ -1,4 +1,4 @@
-#' This function makes cross correlation matrices from different sets of regions within accessibility matrices
+#' This function makes a cross correlation matrix from two accessibility matrices
 #'
 #' @param accmat1 Accessibility matrix 1 (data frame)
 #' @param accmat2 Accessibility matrix 2 (data frame)
@@ -6,38 +6,26 @@
 #' @return Cross correlation matrix
 #' @export
 
-makeCrossCorMatrix<-function(accmat1, accmat2, nmax = 0) {
+makeCrossCorMatrix<-function(am1, am2, nmax = 0) {
   # check input arguments
-  if(!is.data.frame(accmat1)) stop("accmat1 must be a data frame")
-  if(!is.data.frame(accmat2)) stop("accmat2 must be a data frame")
+  if(class(am1)!="AccMatrix") stop("am1 must be an AccMatrix object")
+  if(class(am2)!="AccMatrix") stop("am2 must be an AccMatrix object")
   if(!is.numeric(nmax)) stop("nmax must be a number")
-  if(dim(accmat1)[2]!=dim(accmat2)[2]) stop("dimensions are incompatible")
+  if(dim(am1@accmat)[2]!=dim(am2@accmat)[2]) stop("dimensions are incompatible")
 
   # determine number of ROIs
-  nrois1 <- dim(accmat1)[1]
-  nrois2 <- dim(accmat2)[1]
+  nrois1 <- dim(am1@accmat)[1]
+  nrois2 <- dim(am2@accmat)[1]
 
   # determine number of cells
-  ncells <- dim(accmat1)[2]-3
+  ncells <- dim(am1@accmat)[2]
 
   # reduce ncells if applicable
   if((nmax > 0) & (ncells > nmax)) {ncells = nmax}
 
-  # convert accessibility matrix to numeric matrix object
-  am1 <- t(as.matrix(accmat1[1:nrois1, 4:(3+ncells)]))
-  am2 <- t(as.matrix(accmat2[1:nrois2, 4:(3+ncells)]))
-
   # make correlation matrix
-  cormat <- as.data.frame(cor(am1, am2), stringsAsFactors=F)
-
-  # add annotation columns
-  cormat <- cbind(accmat1[,1], accmat1[,2], accmat1[,3], cormat, stringsAsFactors=F)
-
-  # add annotation rows
-  nm <- as.data.frame(matrix(rep(c("chr", "start", "end"), 3), ncol=3, byrow=T), stringsAsFactors=F)
-  nm <- as.data.frame(t(rbind(setNames(nm, names(accmat2[,1:3])), accmat2[,1:3])), stringsAsFactors=F)
-  cormat <- rbind.data.frame(as.list(nm[1,]), as.list(nm[2,]), as.list(nm[3,]), setNames(cormat, names(nm)), stringsAsFactors=F)
+  cm <- new("CorMatrix", coord1 = am1@coord, coord2 = am2@coord, cormat = as.data.frame(cor(t(am1@accmat), t(am2@accmat))))
 
   # return correlation matrix
-  return(cormat)
+  return(cm)
 }
