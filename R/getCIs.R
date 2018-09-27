@@ -12,6 +12,10 @@ getCIs<-function(corrng, confidence = 0.95) {
   # treat NA values as zero correlation
   corrng[[4]][is.na(corrng[[4]])] <- 0
 
+  # sort correlation coefficients
+  corrng[[4]] <- apply(corrng[[4]], c(1,2), sort)
+  corrng[[4]] <- aperm(corrng[[4]], c(2,3,1))
+
   # retrieve start/end of confidence intervals and median correlation coefficient
   replicates <- dim(corrng[[4]])[3]
   tail <- round(0.5*(1-confidence)*replicates)
