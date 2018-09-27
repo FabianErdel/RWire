@@ -9,6 +9,9 @@ getCIs<-function(corrng, confidence = 0.95) {
   # check input arguments
   if(!is.list(corrng)) stop("corrng must be a list")
 
+  # treat NA values as zero correlation
+  corrng[[4]][is.na(corrng[[4]])] <- 0
+
   # retrieve start/end of confidence intervals and median correlation coefficient
   replicates <- dim(corrng[[4]])[3]
   tail <- round(0.5*(1-confidence)*replicates)
