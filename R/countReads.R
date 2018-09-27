@@ -11,13 +11,13 @@
 countReads<-function(data, rois, mino = 15, ignore_strand = TRUE, chr = 0) {
   # check input arguments
   if(!is.numeric(chr)) stop("chr must be a number")
-  
+
   # filter rois for selected chromosome
-  if(chr > 0) {rois <- rois[seqnames(rois) == paste0('chr',chr)]} 
-    
+  if(chr > 0) {rois <- rois[seqnames(rois) == paste0('chr',chr)]}
+
   # count reads in ROIs
   counts <- GenomicRanges::countOverlaps(rois, data, minoverlap=mino, type="any", ignore.strand=ignore_strand)
-  
+
   # return counts
   return(counts)
 }

@@ -4,16 +4,16 @@
 \alias{writeMatrix}
 \title{Wrapper for making and storing scaled corrleation matrices within 1MB around a defined region}
 \usage{
-writeMatrix(accmat, anno_start, anno_end, cutoff, path)
+writeMatrix(am, anno_start, anno_end, vcutoff, size, path)
 }
 \arguments{
-\item{accmat}{Accessibility matrix}
+\item{am}{Accessibility matrix}
 
 \item{anno_start}{Start of region of interest}
 
 \item{anno_end}{End of region of interest}
 
-\item{cutoff}{Use only regions that are visible in at least this number of cells.}
+\item{vcutoff}{Use only regions that are visible in at least this percentage of cells}
 
 \item{path}{Storage path for scaled correlation matrix}
 }
