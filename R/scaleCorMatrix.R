@@ -20,9 +20,8 @@ scaleCorMatrix<-function(cm, chr, size = 1000, start = 0, end = 249250621) {
   # determine number of ROIs
   nrois <- dim(cm@cormat)[1]
 
-  # make numeric correlation matrix containing regions (on chromosome chr) between start and end
-  sel_indices <- cm@coord1[,1]==paste0('chr',chr) & cm@coord1[,2]>start & cm@coord1[,3]<end
-  m <- data.matrix(cm@cormat[sel_indices, sel_indices])
+  # crop correlation matrix containing regions (on chromosome chr) between start and end
+  cm <- cropCorMatrix(cm, chr, start, end)
 
   # determine scaling factor (kb/pixel)
   # scale <- (max(cm@coord1[,2])-min(cm@coord1[,2]))/size
@@ -37,7 +36,7 @@ scaleCorMatrix<-function(cm, chr, size = 1000, start = 0, end = 249250621) {
   for(i in 1:size) {
     for(j in 1:size) {
       if(counts[i] & counts[j]) {
-        bm[i,j] <- mean(m[(indices[i]+1):indices[i+1], (indices[j]+1):indices[j+1]])
+        bm[i,j] <- mean(cm@cormat[(indices[i]+1):indices[i+1], (indices[j]+1):indices[j+1]])
       }
     }
   }

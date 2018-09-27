@@ -4,10 +4,12 @@
 \alias{scaleAccMatrix}
 \title{This function scales accessibility matrices to genomic coordinates}
 \usage{
-scaleAccMatrix(accmat, size = 1000, start = 0, end = 249250621)
+scaleAccMatrix(am, chr, size = 1000, start = 0, end = 249250621)
 }
 \arguments{
-\item{accmat}{Accessibility matrix (data frame)}
+\item{am}{Accessibility matrix}
+
+\item{chr}{Chromosome to be used}
 
 \item{size}{Number of genomic regions to be used}
 

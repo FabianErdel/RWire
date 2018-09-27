@@ -1,32 +1,33 @@
 #' This function scales accessibility matrices to genomic coordinates
 #'
-#' @param accmat Accessibility matrix (data frame)
+#' @param am Accessibility matrix
+#' @param chr Chromosome to be used
 #' @param size Number of genomic regions to be used
 #' @param start Minimum genomic coordinate
 #' @param end Maximum genomic coordinate
 #' @return Scaled accessibility matrix
 #' @export
 
-scaleAccMatrix<-function(accmat, size = 1000, start = 0, end = 249250621) {
+scaleAccMatrix<-function(am, chr, size = 1000, start = 0, end = 249250621) {
   # check input arguments
-  if(!is.data.frame(accmat)) stop("accmat must be a data frame")
+  if(class(am)!="AccMatrix") stop("am must be an AccMatrix object")
+  if(!is.numeric(chr)) stop("chr must be a number")
   if(!is.numeric(size)) stop("size must be a number")
   if(!is.numeric(start)) stop("start must be a number")
   if(!is.numeric(end)) stop("end must be a number")
 
   # determine number of ROIs
-  nrois <- dim(accmat)[1]
-  ncells <- dim(accmat)[2]-3
+  nrois <- dim(am@accmat)[1]
+  ncells <- dim(am@accmat)[2]
 
-  # make numeric accessibility matrix containing regions between start and end
-  sel_indices <- accmat[,2]>start & accmat[,3]<end
-  m <- data.matrix(accmat[sel_indices, 2:dim(accmat)[2]])
+  # crop accessibility matrix
+  am <- cropAccMatrix(am, chr, start, end)
 
   # determine scaling factor (kb/pixel)
-  # scale <- (max(m[,1])-min(m[,1]))/size
+  # scale <- (max(am@coord[,2])-min(am@coord[,2]))/size
 
   # make genomic bins
-  counts <- as.numeric(table(cut(m[,1], size)))
+  counts <- as.numeric(table(cut(am@coord[,1], size)))
   indices <- c(0, cumsum(counts))
 
   # make binned accessibility matrix
@@ -34,7 +35,7 @@ scaleAccMatrix<-function(accmat, size = 1000, start = 0, end = 249250621) {
 
   for(i in 1:size) {
     if(counts[i] > 0) {
-      bm[i, ] <- colSums(m[(indices[i]+1):indices[i+1], ])[3:(2+ncells)]
+      bm[i, ] <- colSums(am@accmat[(indices[i]+1):indices[i+1], ])
     }
   }
 
