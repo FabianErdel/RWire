@@ -2,14 +2,14 @@
 % Please edit documentation in R/makeCrossCorMatrix.R
 \name{makeCrossCorMatrix}
 \alias{makeCrossCorMatrix}
-\title{This function makes cross correlation matrices from different sets of regions within accessibility matrices}
+\title{This function makes a cross correlation matrix from two accessibility matrices}
 \usage{
-makeCrossCorMatrix(accmat1, accmat2, nmax = 0)
+makeCrossCorMatrix(am1, am2, nmax = 0)
 }
 \arguments{
-\item{accmat1}{Accessibility matrix 1 (data frame)}
+\item{am1}{Accessibility matrix 1}
 
-\item{accmat2}{Accessibility matrix 2 (data frame)}
+\item{am2}{Accessibility matrix 2}
 
 \item{nmax}{Number of cells used for the analysis. When set to 0, all cells will be considered.}
 }
@@ -17,5 +17,5 @@ makeCrossCorMatrix(accmat1, accmat2, nmax = 0)
 Cross correlation matrix
 }
 \description{
-This function makes cross correlation matrices from different sets of regions within accessibility matrices
+This function makes a cross correlation matrix from two accessibility matrices
 }

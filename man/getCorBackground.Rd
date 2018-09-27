@@ -4,12 +4,12 @@
 \alias{getCorBackground}
 \title{This function returns the background correlation obtained with permuted entries}
 \usage{
-getCorBackground(accmat1, accmat2)
+getCorBackground(am1, am2)
 }
 \arguments{
-\item{accmat1}{Accessibility matrix 1}
+\item{am1}{Accessibility matrix 1}
 
-\item{accmat2}{Accessibility matrix 2}
+\item{am2}{Accessibility matrix 2}
 }
 \value{
 Matrix with background correlations (quantiles)
