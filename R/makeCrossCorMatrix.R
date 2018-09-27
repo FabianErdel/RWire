@@ -24,19 +24,19 @@ makeCrossCorMatrix<-function(accmat1, accmat2, nmax = 0) {
   if((nmax > 0) & (ncells > nmax)) {ncells = nmax}
 
   # convert accessibility matrix to numeric matrix object
-  am1 <- apply(t(as.matrix(accmat1[1:nrois1, 4:(3+ncells)])), c(1,2), as.numeric)
-  am2 <- apply(t(as.matrix(accmat2[1:nrois2, 4:(3+ncells)])), c(1,2), as.numeric)
+  am1 <- t(as.matrix(accmat1[1:nrois1, 4:(3+ncells)]))
+  am2 <- t(as.matrix(accmat2[1:nrois2, 4:(3+ncells)]))
 
   # make correlation matrix
-  cormat <- as.data.frame(cor(am1, am2))
+  cormat <- as.data.frame(cor(am1, am2), stringsAsFactors=F)
 
   # add annotation columns
-  cormat <- cbind(accmat1[,1], accmat1[,2], accmat1[,3], cormat)
+  cormat <- cbind(accmat1[,1], accmat1[,2], accmat1[,3], cormat, stringsAsFactors=F)
 
   # add annotation rows
   nm <- as.data.frame(matrix(rep(c("chr", "start", "end"), 3), ncol=3, byrow=T), stringsAsFactors=F)
   nm <- as.data.frame(t(rbind(setNames(nm, names(accmat2[,1:3])), accmat2[,1:3])), stringsAsFactors=F)
-  cormat <- rbind(nm, setNames(cormat, names(nm)))
+  cormat <- rbind.data.frame(as.list(nm[1,]), as.list(nm[2,]), as.list(nm[3,]), setNames(cormat, names(nm)), stringsAsFactors=F)
 
   # return correlation matrix
   return(cormat)

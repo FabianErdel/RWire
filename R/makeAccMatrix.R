@@ -22,7 +22,7 @@ makeAccMatrix<-function(path, rois, nmax = 0) {
   if((nmax > 0) & (ncells > nmax)) {ncells = nmax}
 
   # initialize data frame
-  accmat = data.frame(chr = seqnames(rois), start = start(rois), end = end(rois))
+  accmat = data.frame(chr = seqnames(rois), start = start(rois), end = end(rois), stringsAsFactors=F)
 
   # loop through BED files
   for(i in 1:ncells) {
