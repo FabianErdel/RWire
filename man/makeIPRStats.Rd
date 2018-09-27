@@ -4,10 +4,10 @@
 \alias{makeIPRStats}
 \title{Calculate statistics for the number of integrations per ROI}
 \usage{
-makeIPRStats(matrix)
+makeIPRStats(am)
 }
 \arguments{
-\item{matrix}{Accessibility matrix}
+\item{am}{Accessibility matrix}
 }
 \description{
 Calculate statistics for the number of integrations per ROI

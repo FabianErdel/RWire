@@ -1,15 +1,15 @@
 #' Calculate statistics for the number of integrations per cell
 #'
-#' @param matrix Accessibility matrix
+#' @param am Accessibility matrix
 #' @export
 
-makeIPCStats<-function(matrix) {
+makeIPCStats<-function(am) {
   # check input arguments
-  if(!is.data.frame(matrix)) stop("matrix must be a data frame")
-  
+  if(class(am)!="AccMatrix") stop("am must be an AccMatrix object")
+
   # count total number of integrations for each cell
-  integrations_per_cell <- colSums(matrix[,4:dim(matrix)[2]])
-  
+  integrations_per_cell <- colSums(am@accmat)
+
   # make and plot a histogram of integration numbers
   print(paste("Min: ",min(integrations_per_cell)))
   print(paste("Max: ",max(integrations_per_cell)))

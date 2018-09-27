@@ -4,10 +4,10 @@
 \alias{makeIPRHist}
 \title{This function makes a histogram for the number of cells with integrations per ROI}
 \usage{
-makeIPRHist(matrix, fit = FALSE)
+makeIPRHist(am, fit = FALSE)
 }
 \arguments{
-\item{matrix}{Accessibility matrix (data frame)}
+\item{am}{Accessibility matrix}
 
 \item{fit}{When set to TRUE, fit the histogram (negative binomial distribution)}
 }

@@ -4,10 +4,10 @@
 \alias{makeIPCStats}
 \title{Calculate statistics for the number of integrations per cell}
 \usage{
-makeIPCStats(matrix)
+makeIPCStats(am)
 }
 \arguments{
-\item{matrix}{Accessibility matrix}
+\item{am}{Accessibility matrix}
 }
 \description{
 Calculate statistics for the number of integrations per cell
