@@ -16,9 +16,9 @@ getCIs<-function(corrng, confidence = 0.95) {
   end_index <- replicates - tail + 2
 
   res1 <- new("CorMatrix", coord1 = data.frame(corrng[[1]],corrng[[2]],corrng[[3]]), coord2 = data.frame(corrng[[1]],corrng[[2]],corrng[[3]]), cormat = corrng[[5]])
-  res2 <- new("CorMatrix", coord1 = data.frame(corrng[[1]],corrng[[2]],corrng[[3]]), coord2 = data.frame(corrng[[1]],corrng[[2]],corrng[[3]]), cormat = as.data.frame(corrng[[5]][, , start_index]))
-  res3 <- new("CorMatrix", coord1 = data.frame(corrng[[1]],corrng[[2]],corrng[[3]]), coord2 = data.frame(corrng[[1]],corrng[[2]],corrng[[3]]), cormat = as.data.frame(corrng[[5]][, , end_index]))
-  res4 <- new("CorMatrix", coord1 = data.frame(chr,start,end), coord2 = data.frame(chr,start,end), cormat = as.data.frame(corrng[[5]][, , 1+replicates/2]))
+  res2 <- new("CorMatrix", coord1 = data.frame(corrng[[1]],corrng[[2]],corrng[[3]]), coord2 = data.frame(corrng[[1]],corrng[[2]],corrng[[3]]), cormat = as.data.frame(corrng[[4]][, , start_index]))
+  res3 <- new("CorMatrix", coord1 = data.frame(corrng[[1]],corrng[[2]],corrng[[3]]), coord2 = data.frame(corrng[[1]],corrng[[2]],corrng[[3]]), cormat = as.data.frame(corrng[[4]][, , end_index]))
+  res4 <- new("CorMatrix", coord1 = data.frame(chr,start,end), coord2 = data.frame(chr,start,end), cormat = as.data.frame(corrng[[4]][, , 1+replicates/2]))
 
   # return correlation coefficients and start/end positions of confidence intervals
   return(list(res1,res2,res3,res4))
