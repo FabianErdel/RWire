@@ -4,10 +4,12 @@
 \alias{writeMatrix}
 \title{Wrapper for making and storing scaled corrleation matrices within 1MB around a defined region}
 \usage{
-writeMatrix(am, anno_start, anno_end, vcutoff, size, path)
+writeMatrix(am, chr, anno_start, anno_end, vcutoff, size, path)
 }
 \arguments{
 \item{am}{Accessibility matrix}
+
+\item{chr}{Chromosome for region of interest}
 
 \item{anno_start}{Start of region of interest}
 

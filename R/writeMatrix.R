@@ -1,15 +1,17 @@
 #' Wrapper for making and storing scaled corrleation matrices within 1MB around a defined region
 #'
 #' @param am Accessibility matrix
+#' @param chr Chromosome for region of interest
 #' @param anno_start Start of region of interest
 #' @param anno_end End of region of interest
 #' @param vcutoff Use only regions that are visible in at least this percentage of cells
 #' @param path Storage path for scaled correlation matrix
 #' @export
 
-writeMatrix<-function(am, anno_start, anno_end, vcutoff, size, path) {
+writeMatrix<-function(am, chr, anno_start, anno_end, vcutoff, size, path) {
   # check input arguments
   if(class(am)!="AccMatrix") stop("am must be an AccMatrix object")
+  if(!is.numeric(chr)) stop("chr must be a number")
   if(!is.numeric(anno_start)) stop("anno_start must be a number")
   if(!is.numeric(anno_end)) stop("anno_end must be a number")
 
@@ -36,7 +38,7 @@ writeMatrix<-function(am, anno_start, anno_end, vcutoff, size, path) {
   pngpath <- paste0(path, "_scaled_correlation_matrix.png")
 
   # make scaled matrices; each pixel will corresponds to a genomic range of (end-start)/size
-  scm <- scaleCorMatrix(cormat, size)
+  scm <- scaleCorMatrix(cormat, chr, size)
 
   # delete left half of the matrix
   for(i in 1:size) {scm[i, 1:(i-1)] <- 0}
