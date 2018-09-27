@@ -13,41 +13,35 @@ amp <- makeAccMatrix(inpath, promoters)
 ame <- makeAccMatrix(inpath, enhancers)
 
 # remove empty rows
-amp <- amp[rowSums(amp[,4:dim(amp)[2]])>0, ]
-ame <- ame[rowSums(ame[,4:dim(ame)[2]])>0, ]
-
-# binarize (optional)
-amp[,4:dim(amp)[2]][amp[,4:dim(amp)[2]] > 1] <- 1
-ame[,4:dim(ame)[2]][ame[,4:dim(ame)[2]] > 1] <- 1
+amp <- removeEmptyRows(amp)
+ame <- removeEmptyRows(ame)
 
 # get numbers of accessible promoters and enhancers
-np <- dim(amp)[1]
-ne <- dim(ame)[1]
+np <- dim(amp@accmat)[1]
+ne <- dim(ame@accmat)[1]
 
 # make enhancer-promoter cross correlation matrix for chromosome 1
-amp1 <- amp[amp[,1] == "chr1",]
-ame1 <- ame[ame[,1] == "chr1",]
-ccor <- makeCrossCorMatrix(amp1, ame1)
+amp1 <- cropAccMatrix(amp, 1, 1, 249250621)
+ame1 <- cropAccMatrix(ame, 1, 1, 249250621)
+ccor <- makeCorMatrix(amp1, ame1)
 
 # find highest-correlated enhancer for each promoter (within a given genomic window)
 window <- 100000
 
-mat <- as.matrix(ccor[4:dim(ccor)[1],4:dim(ccor)[2]])
-mat <- apply(mat, c(1,2), as.numeric)
-res <- unname(amp1[,1:6])
+res <- unname(amp1[,1:3])
 res[,4] <- res[,1]
 res[,5] <- 0
 res[,6] <- 0
 
 for(i in 1:dim(ccor)[1]) { # loop through promoters
   # select enhancers within genomic window
-  elist <- which(amp1[i,1]==ame1[,1] & abs((amp1[i,2]+amp1[i,3])/2-(ame1[,2]+ame1[,3])/2)<=window)
+  elist <- which(amp1@coord[i,1]==ame1@coord[,1] & abs((amp1@coord[i,2]+amp1@coord[i,3])/2-(ame1@coord[,2]+ame1@coord[,3])/2)<=window)
 
   if(length(elist)>0) {
     # find the enhancer with the highest correlation
-    index <- which(mat[i,elist] == max(mat[i,elist]))
-    if(length(index)>0) {res[i,5:6] <- ame1[elist[index[1]],2:3]} # multiple enhancers found
-    else {res[i,5:6] <- ame1[elist[index],2:3]} # one enhancer found
+    index <- which(ccor@cormat[i,elist] == max(ccor@cormat[i,elist]))
+    if(length(index)>0) {res[i,5:6] <- ame1@coord[elist[index[1]],2:3]} # multiple enhancers found
+    else {res[i,5:6] <- ame1@coord[elist[index],2:3]} # one enhancer found
   }
 }
 
