@@ -26,7 +26,7 @@ writeMatrix<-function(am, chr, anno_start, anno_end, vcutoff, size, path) {
   am <- removeRowsBelowCutoff(am, vcutoff)
 
   # crop accessibility matrix to genomic region of interest
-  amcrop <- cropAccMatrix(am, anno_start, anno_end)
+  amcrop <- cropAccMatrix(am, chr, anno_start, anno_end)
 
   # get number of accessible regions for each matrix
   nrois <- dim(amcrop@accmat)[1]
