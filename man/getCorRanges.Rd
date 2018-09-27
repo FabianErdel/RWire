@@ -4,10 +4,10 @@
 \alias{getCorRanges}
 \title{This function returns bootstrapped correlation coefficients}
 \usage{
-getCorRanges(accmat, replicates = 100)
+getCorRanges(am, replicates = 100)
 }
 \arguments{
-\item{accmat}{Accessibility matrix}
+\item{am}{Accessibility matrix}
 
 \item{replicates}{Number of replicates for the bootstrap}
 }

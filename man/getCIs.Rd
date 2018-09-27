@@ -12,7 +12,7 @@ getCIs(corrng, confidence = 0.95)
 \item{confidence}{Confidence level (between 0 and 1)}
 }
 \value{
-Stack of matrices containing correlation coefficients (first layer) along with minimum, maximum and median values from bootstrapping (second, third and fourth layer)
+Stack of CorMatrices containing correlation coefficients (first layer) along with minimum, maximum and median values from bootstrapping (second, third and fourth layer)
 }
 \description{
 This function returns confidence intervals
