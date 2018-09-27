@@ -2,12 +2,14 @@
 % Please edit documentation in R/makeCorMatrix.R
 \name{makeCorMatrix}
 \alias{makeCorMatrix}
-\title{This function makes correlation matrices from accessibility matrices}
+\title{This function makes a correlation matrix from two accessibility matrices}
 \usage{
-makeCorMatrix(accmat, nmax = 0)
+makeCorMatrix(am1, am2 = am1, nmax = 0)
 }
 \arguments{
-\item{accmat}{Accessibility matrix (data frame)}
+\item{am1}{Accessibility matrix 1}
+
+\item{am2}{Accessibility matrix 2}
 
 \item{nmax}{Number of cells used for the analysis. When set to 0, all cells will be considered.}
 }
@@ -15,5 +17,5 @@ makeCorMatrix(accmat, nmax = 0)
 Correlation matrix
 }
 \description{
-This function makes correlation matrices from accessibility matrices
+This function makes a correlation matrix from two accessibility matrices
 }

@@ -23,7 +23,7 @@ getCorBackground<-function(am1, am2) {
   ## correlation matrix for resampled rows
   ## (total numbe of integrations for each genomic element kept constant)
   scram1 <- new("AccMatrix", coord = am1@coord, accmat = as.data.frame(t(apply(am1@accmat, 1, function(x) sample(x)))))
-  cm <- makeCrossCorMatrix(scram1, am2)
+  cm <- makeCorMatrix(scram1, am2)
 
   # get coordinates of the first element on each chromosome
   chr1 <- c(1, which((cm@coord1[1:(dim(cm@coord1)[1]-1),1] == cm@coord1[2:dim(cm@coord1)[1],1]) == F)+1, dim(cm@coord1)[1]+1)
@@ -46,7 +46,7 @@ getCorBackground<-function(am1, am2) {
   ## correlation for resampled columns
   ## (total number of integrations for each cell kept constant)
   scram1 <- new("AccMatrix", coord = am1@coord, accmat = as.data.frame(apply(am1@accmat, 2, function(x) sample(x))))
-  cm <- makeCrossCorMatrix(scram1, am2)
+  cm <- makeCorMatrix(scram1, am2)
 
   # get coordinates of the first element on each chromosome
   chr1 <- c(1, which((cm@coord1[1:(dim(cm@coord1)[1]-1),1] == cm@coord1[2:dim(cm@coord1)[1],1]) == F)+1, dim(cm@coord1)[1]+1)
