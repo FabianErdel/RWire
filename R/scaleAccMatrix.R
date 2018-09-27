@@ -27,7 +27,7 @@ scaleAccMatrix<-function(am, chr, size = 1000, start = 0, end = 249250621) {
   # scale <- (max(am@coord[,2])-min(am@coord[,2]))/size
 
   # make genomic bins
-  counts <- as.numeric(table(cut(am@coord[,1], size)))
+  counts <- as.numeric(table(cut(am@coord[,2], size)))
   indices <- c(0, cumsum(counts))
 
   # make binned accessibility matrix
