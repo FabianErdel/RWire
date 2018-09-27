@@ -15,12 +15,13 @@ cropCorMatrix<-function(cm, chr, start, end) {
   if(!is.numeric(end)) stop("end must be a number")
 
   # indices for rows/columns that should be kept
-  indices <- cm@coord1[,1]==paste0('chr',chr) & cm@coord1[,2]>start & cm@coord1[,3]<end
+  indices1 <- cm@coord1[,1]==paste0('chr',chr) & cm@coord1[,2]>start & cm@coord1[,3]<end
+  indices2 <- cm@coord2[,1]==paste0('chr',chr) & cm@coord2[,2]>start & cm@coord2[,3]<end
 
   # remove empty rows
-  cm@coord1 <- cm@coord1[indices, ]
-  cm@coord2 <- cm@coord2[indices, ]
-  cm@cormat <- cm@cormat[indices, indices]
+  cm@coord1 <- cm@coord1[indices1, ]
+  cm@coord2 <- cm@coord2[indices2, ]
+  cm@cormat <- cm@cormat[indices1, indices2]
 
   # return cropped correlation matrix
   return(cm)

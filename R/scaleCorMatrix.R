@@ -31,12 +31,13 @@ scaleCorMatrix<-function(cm, chr, size = 1000, start = 0, end = 249250621) {
   indices <- c(0, cumsum(counts))
 
   # make binned correlation matrix
+  m <- as.matrix(cm@cormat)
   bm <- matrix(0, ncol = size, nrow = size)
 
   for(i in 1:size) {
     for(j in 1:size) {
       if(counts[i] & counts[j]) {
-        bm[i,j] <- mean(cm@cormat[(indices[i]+1):indices[i+1], (indices[j]+1):indices[j+1]])
+        bm[i,j] <- mean(m[(indices[i]+1):indices[i+1], (indices[j]+1):indices[j+1]])
       }
     }
   }
