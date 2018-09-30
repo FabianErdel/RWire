@@ -6,7 +6,7 @@
 #' @return P-E pairs
 #' @export
 
-getPEPairs<-function(cm, cutoff, window = 0) {
+getPEPairs<-function(cm, cutoff, window = .Machine$integer.max) {
   # check input arguments
   if(class(cm)!="CorMatrix") stop("cm must be a CorMatrix object")
   if(!is.numeric(cutoff)) stop("cutoff must be a number")
@@ -23,8 +23,7 @@ getPEPairs<-function(cm, cutoff, window = 0) {
   for(i in 1:dim(cm@coord1)[1]) { # loop through promoters
     # select enhancers within genomic window
     d <- abs((cm@coord1[i,2]+cm@coord1[i,3])/2-(cm@coord2[,2]+cm@coord2[,3])/2)
-    if(window>0) {elist <- which(cm@coord1[i,1]==cm@coord2[,1] & d>0 & d<=window)}
-    else {elist <- which(cm@coord1[i,1]==cm@coord2[,1] & d>0)}
+    elist <- which(cm@coord1[i,1]==cm@coord2[,1] & d>0 & d<=window)
 
     if(length(elist)>0) {
       # find enhancer above cutoff
@@ -37,8 +36,7 @@ getPEPairs<-function(cm, cutoff, window = 0) {
   for(i in 1:dim(cm@coord2)[1]) { # loop through enhancers
     # select promoters within genomic window
     d <- abs((cm@coord1[i,2]+cm@coord1[i,3])/2-(cm@coord2[,2]+cm@coord2[,3])/2)
-    if(window>0) {plist <- which(cm@coord1[i,1]==cm@coord2[,1] & d>0 & d<=window)}
-    else {plist <- which(cm@coord1[i,1]==cm@coord2[,1] & d>0)}
+    plist <- which(cm@coord1[i,1]==cm@coord2[,1] & d>0 & d<=window)
 
     if(length(plist)>0) {
       # find enhancer above cutoff
