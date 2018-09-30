@@ -34,7 +34,7 @@ getPEPairs<-function(cm, cutoff, window = .Machine$double.xmax, max.only = F) {
         # assign enhancers
         if(max.only) { # assign only highest-correlated enhancer above cutoff
           n <- which(cm@cormat[i,elist[indices]] == max(cm@cormat[i,elist[indices]]))
-          pep@promoters$`assigned enhancer indices`[i] <- elist[indices[n[1]]
+          pep@promoters$`assigned enhancer indices`[i] <- elist[indices[n[1]]]
         }
         else { # assign all enhancers above cutoff
           pep@promoters$`assigned enhancer indices`[i] <- list(elist[indices])
@@ -57,7 +57,7 @@ getPEPairs<-function(cm, cutoff, window = .Machine$double.xmax, max.only = F) {
         # assign promoters
         if(max.only) { # assign only highest-correlated promoter above cutoff
           n <- which(cm@cormat[plist[indices],i] == max(cm@cormat[plist[indices],i]))
-          pep@enhancers$`assigned promoter indices`[i] <- plist[indices[n[1]]
+          pep@enhancers$`assigned promoter indices`[i] <- plist[indices[n[1]]]
         }
         else { # assign all promoters above cutoff
           pep@enhancers$`assigned promoter indices`[i] <- list(plist[indices])
