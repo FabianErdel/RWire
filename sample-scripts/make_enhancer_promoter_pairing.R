@@ -26,8 +26,8 @@ ame1 <- cropAccMatrix(ame, 1, 1, 249250621)
 ccor <- makeCorMatrix(amp1, ame1)
 
 # find highest-correlated enhancer for each promoter (within a given genomic window)
-window <- 100000
-pepairs <- getPEPairs(ccor, max.only = T)
+w <- 100000 # 100 kb window
+pepairs <- getPEPairs(ccor, window = w, max.only = T)
 
 # make list of promoters with assigned enhancer
 assigned <- pepairs@promoters[,1:3]
