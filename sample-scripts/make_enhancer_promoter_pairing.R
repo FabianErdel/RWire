@@ -27,26 +27,11 @@ ccor <- makeCorMatrix(amp1, ame1)
 
 # find highest-correlated enhancer for each promoter (within a given genomic window)
 window <- 100000
-
-res <- unname(amp1[,1:3])
-res[,4] <- res[,1]
-res[,5] <- 0
-res[,6] <- 0
-
-for(i in 1:dim(ccor)[1]) { # loop through promoters
-  # select enhancers within genomic window
-  elist <- which(amp1@coord[i,1]==ame1@coord[,1] & abs((amp1@coord[i,2]+amp1@coord[i,3])/2-(ame1@coord[,2]+ame1@coord[,3])/2)<=window)
-
-  if(length(elist)>0) {
-    # find the enhancer with the highest correlation
-    index <- which(ccor@cormat[i,elist] == max(ccor@cormat[i,elist]))
-    if(length(index)>0) {res[i,5:6] <- ame1@coord[elist[index[1]],2:3]} # multiple enhancers found
-    else {res[i,5:6] <- ame1@coord[elist[index],2:3]} # one enhancer found
-  }
-}
+pepairs <- getPEPairs(ccor, max.only = T)
 
 # make list of promoters with assigned enhancer
-assigned <- res[res[,5]>0 & res[,6]>0,]
+assigned <- pepairs@promoters[,1:3]
+assigned[,4:6] <- pepairs@enhancers[pepairs@promoters$`assigned enhancer indices`,1:3]
 
 # save list
 write.table(assigned, file=outpath, quote=F, row.names=F, col.names=F)
