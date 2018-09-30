@@ -6,7 +6,7 @@
 #' @return P-E pairs
 #' @export
 
-getPEPairs<-function(cm, cutoff, window = .Machine$double.xmax, max.only = F) {
+getPEPairs<-function(cm, cutoff = 0, window = .Machine$double.xmax, max.only = F) {
   # check input arguments
   if(class(cm)!="CorMatrix") stop("cm must be a CorMatrix object")
   if(!is.numeric(cutoff)) stop("cutoff must be a number")
