@@ -27,7 +27,7 @@ getPEPairs<-function(cm, cutoff, window = 0) {
     if(length(elist)>0) {
       # find enhancer above cutoff
       indices <- which(cm@cormat[i,elist] >= cutoff)
-      pep@promoters$`assigned enhancer indices`<- list(indices)
+      pep@promoters$`assigned enhancer indices`[i] <- list(indices)
     }
   }
 
@@ -39,7 +39,7 @@ getPEPairs<-function(cm, cutoff, window = 0) {
     if(length(plist)>0) {
       # find enhancer above cutoff
       indices <- which(cm@cormat[plist,i] >= cutoff)
-      pep@enhancers$`assigned promoter indices`<- list(indices)
+      pep@enhancers$`assigned promoter indices`[i] <- list(indices)
     }
   }
 
