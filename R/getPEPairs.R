@@ -22,7 +22,9 @@ getPEPairs<-function(cm, cutoff, window = 0) {
   # assign enhancers to each promoter
   for(i in 1:dim(cm@coord1)[1]) { # loop through promoters
     # select enhancers within genomic window
-    elist <- which(cm@coord1[i,1]==cm@coord2[,1] & abs((cm@coord1[i,2]+cm@coord1[i,3])/2-(cm@coord2[,2]+cm@coord2[,3])/2)<=window)
+    d <- abs((cm@coord1[i,2]+cm@coord1[i,3])/2-(cm@coord2[,2]+cm@coord2[,3])/2)
+    if(window>0) {elist <- which(cm@coord1[i,1]==cm@coord2[,1] & d>0 & d<=window)}
+    else {elist <- which(cm@coord1[i,1]==cm@coord2[,1] & d>0)}
 
     if(length(elist)>0) {
       # find enhancer above cutoff
@@ -34,7 +36,9 @@ getPEPairs<-function(cm, cutoff, window = 0) {
   # assign promoters to each enhancer
   for(i in 1:dim(cm@coord2)[1]) { # loop through enhancers
     # select promoters within genomic window
-    plist <- which(cm@coord1[i,1]==cm@coord2[,1] & abs((cm@coord1[i,2]+cm@coord1[i,3])/2-(cm@coord2[,2]+cm@coord2[,3])/2)<=window)
+    d <- abs((cm@coord1[i,2]+cm@coord1[i,3])/2-(cm@coord2[,2]+cm@coord2[,3])/2)
+    if(window>0) {plist <- which(cm@coord1[i,1]==cm@coord2[,1] & d>0 & d<=window)}
+    else {plist <- which(cm@coord1[i,1]==cm@coord2[,1] & d>0)}
 
     if(length(plist)>0) {
       # find enhancer above cutoff
