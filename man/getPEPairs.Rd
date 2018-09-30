@@ -4,7 +4,7 @@
 \alias{getPEPairs}
 \title{This function returns promoter-enhancer (P-E) pairs based on a correlation matrix}
 \usage{
-getPEPairs(cm, cutoff, window = 0)
+getPEPairs(cm, cutoff, window = .Machine$double.xmax, max.only = F)
 }
 \arguments{
 \item{cm}{Correlation matrix (rows: promoters, columns: enhancers)}
