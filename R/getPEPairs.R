@@ -6,11 +6,12 @@
 #' @return P-E pairs
 #' @export
 
-getPEPairs<-function(cm, cutoff, window = .Machine$double.xmax) {
+getPEPairs<-function(cm, cutoff, window = .Machine$double.xmax, max.only = F) {
   # check input arguments
   if(class(cm)!="CorMatrix") stop("cm must be a CorMatrix object")
   if(!is.numeric(cutoff)) stop("cutoff must be a number")
   if(!is.numeric(window)) stop("window must be a number")
+  if(!is.logical(max.only)) stop("max.only must be logical")
 
   # create PEPairs object
   pep <- new("PEPairs", promoters = cm@coord1, enhancers = cm@coord2)
@@ -26,9 +27,19 @@ getPEPairs<-function(cm, cutoff, window = .Machine$double.xmax) {
     elist <- which(cm@coord1[i,1]==cm@coord2[,1] & d>0 & d<=window)
 
     if(length(elist)>0) {
-      # find enhancer above cutoff
+      # find enhancers above cutoff
       indices <- which(cm@cormat[i,elist] >= cutoff)
-      pep@promoters$`assigned enhancer indices`[i] <- list(elist[indices])
+
+      if(length(indices)>0) {
+        # assign enhancers
+        if(max.only) { # assign only highest-correlated enhancer above cutoff
+          n <- which(cm@cormat[i,elist[indices]] == max(cm@cormat[i,elist[indices]]))
+          pep@promoters$`assigned enhancer indices`[i] <- elist[indices[n[1]]}
+        }
+        else { # assign all enhancers above cutoff
+          pep@promoters$`assigned enhancer indices`[i] <- list(elist[indices])
+        }
+      }
     }
   }
 
@@ -39,9 +50,19 @@ getPEPairs<-function(cm, cutoff, window = .Machine$double.xmax) {
     plist <- which(cm@coord1[i,1]==cm@coord2[,1] & d>0 & d<=window)
 
     if(length(plist)>0) {
-      # find enhancer above cutoff
+      # find promoters above cutoff
       indices <- which(cm@cormat[plist,i] >= cutoff)
-      pep@enhancers$`assigned promoter indices`[i] <- list(plist[indices])
+
+      if(length(indices)>0) {
+        # assign promoters
+        if(max.only) { # assign only highest-correlated promoter above cutoff
+          n <- which(cm@cormat[plist[indices],i] == max(cm@cormat[plist[indices],i]))
+          pep@enhancers$`assigned promoter indices`[i] <- plist[indices[n[1]]}
+        }
+        else { # assign all promoters above cutoff
+          pep@enhancers$`assigned promoter indices`[i] <- list(plist[indices])
+        }
+      }
     }
   }
 
