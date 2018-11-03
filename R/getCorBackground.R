@@ -21,20 +21,20 @@ getCorBackground<-function(am1, am2) {
   bg_trans<- matrix(0, nrow=2, ncol=100)
 
   ## correlation matrix for resampled rows
-  ## (total numbe of integrations for each genomic element kept constant)
+  ## (total number of integrations for each genomic element kept constant)
   scram1 <- new("AccMatrix", coord = am1@coord, accmat = as.data.frame(t(apply(am1@accmat, 1, function(x) sample(x)))))
   cm <- makeCorMatrix(scram1, am2)
 
   # get coordinates of the first element on each chromosome
   chr1 <- c(1, which((cm@coord1[1:(dim(cm@coord1)[1]-1),1] == cm@coord1[2:dim(cm@coord1)[1],1]) == F)+1, dim(cm@coord1)[1]+1)
-  chr2 <- c(1, which((cm@coord2[1:(dim(cm@coord2)[2]-1),1] == cm@coord2[2:dim(cm@coord2)[2],1]) == F)+1, dim(cm@coord2)[2]+1)
+  chr2 <- c(1, which((cm@coord2[1:(dim(cm@coord2)[1]-1),1] == cm@coord2[2:dim(cm@coord2)[1],1]) == F)+1, dim(cm@coord2)[1]+1)
 
   # aggregate cis and trans correlations
   cis <- vector("list", length(chr1)-1)
   trans <- vector("list", length(chr1)-1)
   for(i in 1:(length(chr1)-1)) {
-    chrname <- cm@cormat[chr1[i],1]
-    chrindex <- which(cm@cormat[1,chr2[1:(length(chr2)-1)]]==chrname)
+    chrname <- cm@coord1[chr1[i],1]
+    chrindex <- which(cm@coord2[chr2[1:(length(chr2)-1)],1]==chrname)
     cis[[i]] <- as.matrix(cm@cormat[chr1[i]:(chr1[i+1]-1), chr2[chrindex]:(chr2[chrindex+1]-1)])
     trans[[i]] <- as.matrix(cm@cormat[chr1[i]:(chr1[i+1]-1), -c(1:3, chr2[chrindex]:(chr2[chrindex+1]-1))])
   }
@@ -50,14 +50,14 @@ getCorBackground<-function(am1, am2) {
 
   # get coordinates of the first element on each chromosome
   chr1 <- c(1, which((cm@coord1[1:(dim(cm@coord1)[1]-1),1] == cm@coord1[2:dim(cm@coord1)[1],1]) == F)+1, dim(cm@coord1)[1]+1)
-  chr2 <- c(1, which((cm@coord2[1:(dim(cm@coord2)[2]-1),1] == cm@coord2[2:dim(cm@coord2)[2],1]) == F)+1, dim(cm@coord2)[2]+1)
+  chr2 <- c(1, which((cm@coord2[1:(dim(cm@coord2)[1]-1),1] == cm@coord2[2:dim(cm@coord2)[1],1]) == F)+1, dim(cm@coord2)[1]+1)
 
   # aggregate cis and trans correlations
   cis <- vector("list", length(chr1)-1)
   trans <- vector("list", length(chr1)-1)
   for(i in 1:(length(chr1)-1)) {
-    chrname <- cm@cormat[chr1[i],1]
-    chrindex <- which(cm@cormat[1,chr2[1:(length(chr2)-1)]]==chrname)
+    chrname <- cm@coord1[chr1[i],1]
+    chrindex <- which(cm@coord2[chr2[1:(length(chr2)-1)],1]==chrname)
     cis[[i]] <- as.matrix(cm@cormat[chr1[i]:(chr1[i+1]-1), chr2[chrindex]:(chr2[chrindex+1]-1)])
     trans[[i]] <- as.matrix(cm@cormat[chr1[i]:(chr1[i+1]-1), -c(1:3, chr2[chrindex]:(chr2[chrindex+1]-1))])
   }
